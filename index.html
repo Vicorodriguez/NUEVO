@@ -7,29 +7,30 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
-    <!-- CTRL+F: TIPOGRAFIA_FUENTES - Puedes cambiar las fuentes importadas de Google Fonts aquí -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
-        /* CTRL+F: TIPOGRAFIA_TAILWIND - Ajusta los nombres de las fuentes para títulos (display) y texto base (sans) */
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', '"Montserrat"', 'sans-serif'],
-                        display: ['"Syne"', '"Montserrat"', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Syne"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
                     },
                     colors: {
                         brand: {
-                            dark: '#0a0a0c',
-                            card: '#141418',
-                            accent: '#f35627',
-                            accentHover: '#d94317',
-                            gold: '#d4af37'
+                            dark: '#0d0d11',
+                            card: '#16161c',
+                            cardHover: '#1f1f27',
+                            accent: '#ff5e3a',
+                            accentHover: '#e04825',
+                            ochre: '#e5a93c',
+                            border: 'rgba(255, 255, 255, 0.08)'
                         }
                     }
                 }
@@ -38,42 +39,46 @@
     </script>
     <style>
         body {
-            background-color: #0a0a0c;
+            background-color: #0d0d11;
             color: #f3f4f6;
         }
         .glass-nav {
-            background: rgba(10, 10, 12, 0.85);
-            backdrop-filter: blur(12px);
+            background: rgba(13, 13, 17, 0.85);
+            backdrop-filter: blur(16px);
         }
         .art-card-overlay {
-            background: linear-gradient(0deg, rgba(10,10,12,0.95) 0%, rgba(10,10,12,0.4) 60%, rgba(10,10,12,0) 100%);
+            background: linear-gradient(0deg, rgba(13,13,17,0.95) 0%, rgba(13,13,17,0.4) 60%, rgba(13,13,17,0) 100%);
+        }
+        .text-glow {
+            text-shadow: 0 0 25px rgba(255, 94, 58, 0.35);
         }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-brand-accent selection:text-white">
 
-    <!-- Navigation Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-white/10 transition-all duration-300">
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-brand-border transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <a href="#" class="flex flex-col">
                 <span class="font-display font-extrabold text-2xl tracking-wider text-white uppercase">VICO RODRÍGUEZ</span>
-                <span class="text-xs text-brand-accent tracking-widest uppercase font-semibold">Murales & Arte Plástico</span>
+                <span class="text-[10px] text-brand-accent tracking-widest uppercase font-semibold">Arte Plástico & Gran Formato</span>
             </a>
 
-            <!-- Desktop Nav Links -->
+            <!-- Desktop Navigation -->
             <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-300">
-                <a href="#obras" class="hover:text-brand-accent transition-colors">Obras y Murales</a>
+                <a href="#obras" class="hover:text-brand-accent transition-colors">Obras & Murales</a>
+                <a href="#proceso" class="hover:text-brand-accent transition-colors">Proceso de Trabajo</a>
                 <a href="#sobre-mi" class="hover:text-brand-accent transition-colors">Sobre la Artista</a>
-                <a href="#cotizar" class="hover:text-brand-accent transition-colors">Cotizar Proyecto</a>
-                <!-- CTRL+F: INSTAGRAM_NAV -->
-                <a href="https://instagram.com/vicorodriguezgz" target="_blank" class="hover:text-brand-accent transition-colors flex items-center gap-1.5"><i class="fa-brands fa-instagram text-brand-accent"></i> @vicorodriguezgz</a>
+                <a href="#faq" class="hover:text-brand-accent transition-colors">Preguntas Frecuentes</a>
+                <a href="https://instagram.com/vicorodriguezgz" target="_blank" class="hover:text-brand-accent transition-colors flex items-center gap-1.5 text-xs bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+                    <i class="fa-brands fa-instagram text-brand-accent"></i> @vicorodriguezgz
+                </a>
             </nav>
 
-            <!-- Quick WhatsApp CTA -->
+            <!-- Quick Action CTA -->
             <a href="#cotizar" class="hidden sm:inline-flex items-center gap-2 bg-brand-accent hover:bg-brand-accentHover text-white font-semibold px-5 py-2.5 rounded-full text-sm transition-all shadow-lg shadow-brand-accent/20">
-                <i class="fa-brands fa-whatsapp text-lg">
-                </i>
-                <span>Cotizar por WhatsApp</span>
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span>Cotizar Proyecto</span>
             </a>
 
             <!-- Mobile Menu Toggle -->
@@ -82,11 +87,12 @@
             </button>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden bg-brand-card border-b border-white/10 px-4 pt-2 pb-6 space-y-4">
-            <a href="#obras" class="block text-gray-300 hover:text-brand-accent py-2 font-medium">Obras y Murales</a>
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-card border-b border-brand-border px-4 pt-3 pb-6 space-y-4">
+            <a href="#obras" class="block text-gray-300 hover:text-brand-accent py-2 font-medium">Obras & Murales</a>
+            <a href="#proceso" class="block text-gray-300 hover:text-brand-accent py-2 font-medium">Proceso de Trabajo</a>
             <a href="#sobre-mi" class="block text-gray-300 hover:text-brand-accent py-2 font-medium">Sobre la Artista</a>
-            <a href="#cotizar" class="block text-gray-300 hover:text-brand-accent py-2 font-medium">Cotizar Proyecto</a>
+            <a href="#faq" class="block text-gray-300 hover:text-brand-accent py-2 font-medium">Preguntas Frecuentes</a>
             <a href="https://instagram.com/vicorodriguezgz" target="_blank" class="block text-gray-300 hover:text-brand-accent py-2 font-medium"><i class="fa-brands fa-instagram mr-2 text-brand-accent"></i>@vicorodriguezgz</a>
             <a href="#cotizar" class="w-full inline-flex items-center justify-center gap-2 bg-brand-accent text-white font-semibold px-5 py-3 rounded-full text-sm">
                 <i class="fa-brands fa-whatsapp text-lg"></i> Cotizar WhatsApp
@@ -95,25 +101,24 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden flex items-center min-h-[85vh]">
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden flex items-center min-h-[88vh]">
         <div class="absolute inset-0 z-0">
-            <!-- CTRL+F: IMAGEN_HERO_FONDO - Reemplaza el enlace en 'src' con la foto principal que quieras para la portada -->
-            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1920&q=80" alt="Fondo Arte Vico Rodríguez" class="w-full h-full object-cover opacity-20 filter blur-sm">
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-transparent"></div>
+            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1920&q=80" alt="Fondo Arte Vico Rodríguez" class="w-full h-full object-cover opacity-15 filter blur-xs">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/85 to-transparent"></div>
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-brand-accent text-xs font-semibold uppercase tracking-widest mb-6">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/30 text-brand-accent text-xs font-semibold uppercase tracking-widest mb-6">
                 <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
                 Portafolio Oficial & Encargos Directos
             </div>
             
-            <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold text-white leading-tight max-w-4xl">
-                Transformando espacios con <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-amber-400">arte en gran formato</span>
+            <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold text-white leading-tight max-w-4xl tracking-tight">
+                Transformando muros y espacios en <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-amber-400 to-brand-ochre text-glow">experiencias visuales</span>
             </h1>
             
-            <p class="mt-6 text-lg sm:text-xl text-gray-300 max-w-2xl font-light">
-                Intervenciones murales a gran escala para proyectos comerciales y residenciales, junto a obras exclusivas sobre lienzo.
+            <p class="mt-6 text-lg sm:text-xl text-gray-300 max-w-2xl font-light leading-relaxed">
+                Intervenciones murales a gran escala para proyectos residenciales y comerciales, junto con colecciones exclusivas sobre lienzo.
             </p>
 
             <div class="mt-10 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
@@ -121,48 +126,48 @@
                     <i class="fa-brands fa-whatsapp text-xl"></i>
                     Cotizar mi Mural o Cuadro
                 </a>
-                <a href="#obras" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white text-base font-semibold px-8 py-4 rounded-xl border border-white/15 transition-all">
+                <a href="#obras" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white text-base font-semibold px-8 py-4 rounded-xl border border-white/15 transition-all">
                     Ver Portafolio
                     <i class="fa-solid fa-arrow-down text-sm"></i>
                 </a>
             </div>
 
-            <!-- Stats/Highlights -->
-            <div class="mt-16 grid grid-cols-2 md:grid-cols-3 gap-6 border-t border-white/10 pt-8 max-w-xl">
+            <!-- Highlights Badges -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-3 gap-6 border-t border-brand-border pt-8 max-w-2xl">
                 <div>
                     <span class="font-display text-3xl font-bold text-white">100%</span>
-                    <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Obras Originales</p>
+                    <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">Diseños Originales</p>
                 </div>
                 <div>
                     <span class="font-display text-3xl font-bold text-white">Murales</span>
-                    <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Interiores / Exteriores</p>
+                    <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">Interiores & Exteriores</p>
                 </div>
                 <div class="col-span-2 md:col-span-1">
                     <span class="font-display text-3xl font-bold text-white">Lienzos</span>
-                    <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Envíos & Encargos</p>
+                    <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">A medida & Envíos</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Portfolio Gallery Section -->
-    <section id="obras" class="py-20 bg-brand-dark/50 border-t border-white/5">
+    <section id="obras" class="py-24 bg-brand-dark border-t border-brand-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
                 <div>
-                    <span class="text-brand-accent font-semibold text-sm uppercase tracking-widest">Galería de Trabajos</span>
-                    <h2 class="font-display text-3xl sm:text-5xl font-bold text-white mt-2">Murales & Cuadros</h2>
+                    <span class="text-brand-accent font-semibold text-xs uppercase tracking-widest">Galería Seleccionada</span>
+                    <h2 class="font-display text-3xl sm:text-5xl font-bold text-white mt-1">Murales & Cuadros</h2>
                 </div>
 
                 <!-- Filter Tabs -->
-                <div class="mt-6 md:mt-0 flex flex-wrap gap-2 bg-brand-card p-1.5 rounded-xl border border-white/10">
-                    <button onclick="filterWorks('all')" class="filter-btn active text-xs sm:text-sm font-semibold px-4 py-2 rounded-lg transition-all bg-brand-accent text-white" data-filter="all">
+                <div class="mt-6 md:mt-0 flex flex-wrap gap-2 bg-brand-card p-1.5 rounded-xl border border-brand-border">
+                    <button onclick="filterWorks('all')" class="filter-btn active text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-lg transition-all bg-brand-accent text-white" data-filter="all">
                         Todos
                     </button>
-                    <button onclick="filterWorks('murales')" class="filter-btn text-xs sm:text-sm font-semibold px-4 py-2 rounded-lg transition-all text-gray-400 hover:text-white" data-filter="murales">
+                    <button onclick="filterWorks('murales')" class="filter-btn text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-lg transition-all text-gray-400 hover:text-white" data-filter="murales">
                         Murales
                     </button>
-                    <button onclick="filterWorks('cuadros')" class="filter-btn text-xs sm:text-sm font-semibold px-4 py-2 rounded-lg transition-all text-gray-400 hover:text-white" data-filter="cuadros">
+                    <button onclick="filterWorks('cuadros')" class="filter-btn text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-lg transition-all text-gray-400 hover:text-white" data-filter="cuadros">
                         Cuadros
                     </button>
                 </div>
@@ -171,20 +176,19 @@
             <!-- Gallery Grid -->
             <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Item 1: Mural -->
-                <div class="art-card gallery-item murales group relative bg-brand-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-accent/50 transition-all duration-300">
+                <!-- Item 1: Mural Comercial -->
+                <div class="art-card gallery-item murales group relative bg-brand-card rounded-2xl overflow-hidden border border-brand-border hover:border-brand-accent/50 transition-all duration-300">
                     <div class="relative h-80 overflow-hidden">
-                        <!-- CTRL+F: IMAGEN_GALERIA_MURAL_1 -->
-                        <img src="https://images.unsplash.com/photo-1561055657-b9e0bf0fa360?auto=format&fit=crop&w=800&q=80" alt="Mural Urbano" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
+                        <img src="https://images.unsplash.com/photo-1561055657-b9e0bf0fa360?auto=format&fit=crop&w=800&q=80" alt="Mural Urbano Comercial" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 bg-black/70 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
                             Mural Comercial
                         </span>
                         <div class="art-card-overlay absolute inset-0 flex flex-col justify-end p-6">
-                            <h3 class="font-display text-xl font-bold text-white">Mural "Energía Urbana"</h3>
-                            <p class="text-sm text-gray-300 mt-1">Local Comercial, Palermo</p>
+                            <h3 class="font-display text-xl font-bold text-white">Energía Urbana</h3>
+                            <p class="text-xs text-gray-300 mt-0.5">Local Gastronómico, Palermo</p>
                             <div class="flex items-center justify-between mt-4">
-                                <span class="text-xs text-amber-400 font-medium"><i class="fa-solid fa-paint-roller mr-1"></i> Acrílico y Spray</span>
-                                <button onclick="openModal('Mural Energía Urbana', 'Local Comercial, Palermo', 'Acrílico y Aerosol sobre mampostería', 'https://images.unsplash.com/photo-1561055657-b9e0bf0fa360?auto=format&fit=crop&w=1200&q=80', 'Mural')" class="text-xs font-bold text-white bg-white/20 hover:bg-brand-accent px-3 py-1.5 rounded-lg backdrop-blur-sm transition-all">
+                                <span class="text-xs text-brand-ochre font-medium"><i class="fa-solid fa-paint-roller mr-1"></i> Acrílico & Spray</span>
+                                <button onclick="openModal('Energía Urbana', 'Local Gastronómico, Palermo', 'Acrílico y Aerosol sintético sobre mampostería exterior', 'https://images.unsplash.com/photo-1561055657-b9e0bf0fa360?auto=format&fit=crop&w=1200&q=80', 'Mural Comercial')" class="text-xs font-bold text-white bg-white/20 hover:bg-brand-accent px-3 py-1.5 rounded-lg backdrop-blur-sm transition-all">
                                     Ver Detalle
                                 </button>
                             </div>
@@ -193,16 +197,15 @@
                 </div>
 
                 <!-- Item 2: Cuadro Disponible -->
-                <div class="art-card gallery-item cuadros group relative bg-brand-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-accent/50 transition-all duration-300">
+                <div class="art-card gallery-item cuadros group relative bg-brand-card rounded-2xl overflow-hidden border border-brand-border hover:border-brand-accent/50 transition-all duration-300">
                     <div class="relative h-80 overflow-hidden">
-                        <!-- CTRL+F: IMAGEN_GALERIA_CUADRO_1 -->
-                        <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80" alt="Cuadro Abstracto" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80" alt="Cuadro Abstracto" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <span class="absolute top-4 left-4 bg-emerald-500/90 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                             🔴 Disponible
                         </span>
                         <div class="art-card-overlay absolute inset-0 flex flex-col justify-end p-6">
                             <h3 class="font-display text-xl font-bold text-white">Explosión Orgánica</h3>
-                            <p class="text-sm text-gray-300 mt-1">120 x 90 cm — Óleo / Lienzo</p>
+                            <p class="text-xs text-gray-300 mt-0.5">120 x 90 cm — Téxtura sobre Lienzo</p>
                             <div class="flex items-center justify-between mt-4">
                                 <span class="text-xs text-gray-300 font-medium">Obra Original</span>
                                 <a href="#cotizar" onclick="selectWorkForQuote('Cuadro: Explosión Orgánica')" class="text-xs font-bold text-white bg-brand-accent hover:bg-brand-accentHover px-3 py-1.5 rounded-lg transition-all">
@@ -214,19 +217,18 @@
                 </div>
 
                 <!-- Item 3: Mural Residencial -->
-                <div class="art-card gallery-item murales group relative bg-brand-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-accent/50 transition-all duration-300">
+                <div class="art-card gallery-item murales group relative bg-brand-card rounded-2xl overflow-hidden border border-brand-border hover:border-brand-accent/50 transition-all duration-300">
                     <div class="relative h-80 overflow-hidden">
-                        <!-- CTRL+F: IMAGEN_GALERIA_MURAL_2 -->
-                        <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80" alt="Mural Residencial" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
+                        <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80" alt="Mural Residencial" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 bg-black/70 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
                             Mural Residencial
                         </span>
                         <div class="art-card-overlay absolute inset-0 flex flex-col justify-end p-6">
-                            <h3 class="font-display text-xl font-bold text-white">Atardecer Abstracto</h3>
-                            <p class="text-sm text-gray-300 mt-1">Terraza Privada, Belgrano</p>
+                            <h3 class="font-display text-xl font-bold text-white">Atardecer Fluido</h3>
+                            <p class="text-xs text-gray-300 mt-0.5">Terraza Privada, Belgrano</p>
                             <div class="flex items-center justify-between mt-4">
-                                <span class="text-xs text-amber-400 font-medium"><i class="fa-solid fa-brush mr-1"></i> Gran Formato</span>
-                                <button onclick="openModal('Atardecer Abstracto', 'Terraza Privada', 'Técnica mixta sobre pared', 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1200&q=80', 'Mural')" class="text-xs font-bold text-white bg-white/20 hover:bg-brand-accent px-3 py-1.5 rounded-lg backdrop-blur-sm transition-all">
+                                <span class="text-xs text-brand-ochre font-medium"><i class="fa-solid fa-brush mr-1"></i> Gran Formato</span>
+                                <button onclick="openModal('Atardecer Fluido', 'Terraza Privada, Belgrano', 'Técnica mixta con látex de alta resistencia intemperie', 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1200&q=80', 'Mural Residencial')" class="text-xs font-bold text-white bg-white/20 hover:bg-brand-accent px-3 py-1.5 rounded-lg backdrop-blur-sm transition-all">
                                     Ver Detalle
                                 </button>
                             </div>
@@ -234,17 +236,16 @@
                     </div>
                 </div>
 
-                <!-- Item 4: Cuadro Coleccion Privada -->
-                <div class="art-card gallery-item cuadros group relative bg-brand-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-accent/50 transition-all duration-300">
+                <!-- Item 4: Cuadro VENDIDO / Encargo -->
+                <div class="art-card gallery-item cuadros group relative bg-brand-card rounded-2xl overflow-hidden border border-brand-border hover:border-brand-accent/50 transition-all duration-300">
                     <div class="relative h-80 overflow-hidden">
-                        <!-- CTRL+F: IMAGEN_GALERIA_CUADRO_2 -->
-                        <img src="https://images.unsplash.com/photo-1578926375605-eaf7559b1458?auto=format&fit=crop&w=800&q=80" alt="Cuadro Vendido" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-gray-600/90 text-white text-xs font-bold px-3 py-1 rounded-full">
+                        <img src="https://images.unsplash.com/photo-1578926375605-eaf7559b1458?auto=format&fit=crop&w=800&q=80" alt="Cuadro Vendido" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 bg-gray-700/90 text-gray-200 text-xs font-bold px-3 py-1 rounded-full">
                             ⚪ Colección Privada
                         </span>
                         <div class="art-card-overlay absolute inset-0 flex flex-col justify-end p-6">
                             <h3 class="font-display text-xl font-bold text-white">Geometría de Luz</h3>
-                            <p class="text-sm text-gray-300 mt-1">150 x 100 cm — Acrílico</p>
+                            <p class="text-xs text-gray-300 mt-0.5">150 x 100 cm — Acrílico & Relieve</p>
                             <div class="flex items-center justify-between mt-4">
                                 <span class="text-xs text-gray-400">Vendido</span>
                                 <a href="#cotizar" onclick="selectWorkForQuote('Encargo similar a Geometría de Luz')" class="text-xs font-bold text-white bg-white/20 hover:bg-brand-accent px-3 py-1.5 rounded-lg transition-all">
@@ -255,20 +256,19 @@
                     </div>
                 </div>
 
-                <!-- Item 5: Mural Interior -->
-                <div class="art-card gallery-item murales group relative bg-brand-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-accent/50 transition-all duration-300">
+                <!-- Item 5: Mural Interior Oficina -->
+                <div class="art-card gallery-item murales group relative bg-brand-card rounded-2xl overflow-hidden border border-brand-border hover:border-brand-accent/50 transition-all duration-300">
                     <div class="relative h-80 overflow-hidden">
-                        <!-- CTRL+F: IMAGEN_GALERIA_MURAL_3 -->
-                        <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80" alt="Mural Oficina" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
+                        <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80" alt="Mural Oficina" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 bg-black/70 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
                             Intervención Interior
                         </span>
                         <div class="art-card-overlay absolute inset-0 flex flex-col justify-end p-6">
                             <h3 class="font-display text-xl font-bold text-white">Lumina Studio</h3>
-                            <p class="text-sm text-gray-300 mt-1">Oficinas Creativas</p>
+                            <p class="text-xs text-gray-300 mt-0.5">Oficinas Creativas</p>
                             <div class="flex items-center justify-between mt-4">
-                                <span class="text-xs text-amber-400 font-medium"><i class="fa-solid fa-paintbrush mr-1"></i> Diseño a medida</span>
-                                <button onclick="openModal('Lumina Studio', 'Oficinas', 'Pintura plástica y relieve', 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80', 'Mural')" class="text-xs font-bold text-white bg-white/20 hover:bg-brand-accent px-3 py-1.5 rounded-lg backdrop-blur-sm transition-all">
+                                <span class="text-xs text-brand-ochre font-medium"><i class="fa-solid fa-paintbrush mr-1"></i> Diseño a medida</span>
+                                <button onclick="openModal('Lumina Studio', 'Oficinas Creativas', 'Pintura plástica y juego de volúmenes', 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80', 'Intervención Interior')" class="text-xs font-bold text-white bg-white/20 hover:bg-brand-accent px-3 py-1.5 rounded-lg backdrop-blur-sm transition-all">
                                     Ver Detalle
                                 </button>
                             </div>
@@ -277,16 +277,15 @@
                 </div>
 
                 <!-- Item 6: Cuadro Disponible -->
-                <div class="art-card gallery-item cuadros group relative bg-brand-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-accent/50 transition-all duration-300">
+                <div class="art-card gallery-item cuadros group relative bg-brand-card rounded-2xl overflow-hidden border border-brand-border hover:border-brand-accent/50 transition-all duration-300">
                     <div class="relative h-80 overflow-hidden">
-                        <!-- CTRL+F: IMAGEN_GALERIA_CUADRO_3 -->
-                        <img src="https://images.unsplash.com/photo-1549887534-1541e9326642?auto=format&fit=crop&w=800&q=80" alt="Cuadro Texturas" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1549887534-1541e9326642?auto=format&fit=crop&w=800&q=80" alt="Cuadro Texturas Pan de Oro" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <span class="absolute top-4 left-4 bg-emerald-500/90 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                             🔴 Disponible
                         </span>
                         <div class="art-card-overlay absolute inset-0 flex flex-col justify-end p-6">
                             <h3 class="font-display text-xl font-bold text-white">Erosión Dorado</h3>
-                            <p class="text-sm text-gray-300 mt-1">100 x 80 cm — Mixta con Pan de Oro</p>
+                            <p class="text-xs text-gray-300 mt-0.5">100 x 80 cm — Mixta con Pan de Oro</p>
                             <div class="flex items-center justify-between mt-4">
                                 <span class="text-xs text-gray-300 font-medium">Obra Original</span>
                                 <a href="#cotizar" onclick="selectWorkForQuote('Cuadro: Erosión Dorado')" class="text-xs font-bold text-white bg-brand-accent hover:bg-brand-accentHover px-3 py-1.5 rounded-lg transition-all">
@@ -301,6 +300,67 @@
         </div>
     </section>
 
+    <!-- Work Process Section (Basado en las condiciones del presupuesto) -->
+    <section id="proceso" class="py-20 bg-brand-card/60 border-t border-brand-border relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-accent font-semibold text-xs uppercase tracking-widest">Metodología Clara</span>
+                <h2 class="font-display text-3xl sm:text-5xl font-bold text-white mt-2">¿Cómo trabajamos tu proyecto?</h2>
+                <p class="text-gray-400 text-sm sm:text-base mt-3">Un proceso ágil y transparente desde la primera idea hasta la pincelada final.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Step 1 -->
+                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border relative">
+                    <span class="text-4xl font-display font-extrabold text-brand-accent/20 absolute top-4 right-4">01</span>
+                    <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent text-xl mb-4">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-lg">Consulta & Cotización</h3>
+                    <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                        Evaluamos las medidas, la ubicación y la idea general de tu espacio para entregarte un presupuesto estimado.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border relative">
+                    <span class="text-4xl font-display font-extrabold text-brand-accent/20 absolute top-4 right-4">02</span>
+                    <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent text-xl mb-4">
+                        <i class="fa-solid fa-pen-ruler"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-lg">Seña (20%) & Bocetado</h3>
+                    <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                        Con una seña inicial del 20% congelamos la fecha y diseñamos la propuesta. Incluye <strong class="text-amber-400 font-normal">hasta 2 correcciones</strong>.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border relative">
+                    <span class="text-4xl font-display font-extrabold text-brand-accent/20 absolute top-4 right-4">03</span>
+                    <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent text-xl mb-4">
+                        <i class="fa-solid fa-paint-roller"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-lg">Preparación & Inicio</h3>
+                    <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                        La pared debe estar pintada de blanco o gris previa realización. El saldo restante (50%) se abona el día que arranca la obra.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border relative">
+                    <span class="text-4xl font-display font-extrabold text-brand-accent/20 absolute top-4 right-4">04</span>
+                    <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent text-xl mb-4">
+                        <i class="fa-solid fa-sparkles"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-lg">Entrega & Barnizado</h3>
+                    <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                        Aplicamos sellador de protección para garantizar máxima durabilidad en interiores o intemperie. ¡Muro listo!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="sobre-mi" class="py-24 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -308,71 +368,55 @@
                 
                 <!-- Artist Image Showcase -->
                 <div class="lg:col-span-5 relative">
-                    <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                        <!-- CTRL+F: IMAGEN_SOBRE_MI_VICO - Reemplaza el enlace en 'src' con la foto donde aparezcas pintando o en tu taller -->
-                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80" alt="Vico Rodríguez Trabajando" class="w-full h-[500px] object-cover">
+                    <div class="relative rounded-2xl overflow-hidden border border-brand-border shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80" alt="Vico Rodríguez Trabajando" class="w-full h-[520px] object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent"></div>
                     </div>
-                    <div class="absolute -bottom-6 -right-6 bg-brand-card border border-white/10 p-6 rounded-2xl hidden sm:block shadow-xl">
-                        <p class="font-display text-2xl font-bold text-brand-accent">Arte & Gran Formato</p>
-                        <p class="text-xs text-gray-400 mt-1">Para hogares, comercios y coleccionistas</p>
+                    <div class="absolute -bottom-6 -right-6 bg-brand-card border border-brand-border p-6 rounded-2xl hidden sm:block shadow-2xl">
+                        <p class="font-display text-xl font-bold text-brand-accent">Arte & Gran Formato</p>
+                        <p class="text-xs text-gray-400 mt-1">Para hogares, locales comerciales y coleccionistas</p>
                     </div>
                 </div>
 
                 <!-- Artist Bio Content -->
                 <div class="lg:col-span-7">
-                    <span class="text-brand-accent font-semibold text-sm uppercase tracking-widest">Sobre Vico Rodríguez</span>
+                    <span class="text-brand-accent font-semibold text-xs uppercase tracking-widest">Sobre Vico Rodríguez</span>
                     <h2 class="font-display text-3xl sm:text-5xl font-bold text-white mt-2 leading-tight">
-                        Transformando paredes y lienzos en experiencias visuales
+                        Transformando superficies en expresiones con identidad propia
                     </h2>
 
                     <p class="mt-6 text-gray-300 text-base sm:text-lg leading-relaxed font-light">
-                        Soy <strong class="text-white font-semibold">Vico Rodríguez</strong> (@vicorodriguezgz), artista plástica y muralista. Me dedico a intervenir paredes y espacios urbanos o residenciales en obras a gran escala, combinando textura, color y fluidez técnica.
+                        Soy <strong class="text-white font-semibold">Vico Rodríguez</strong> (<a href="https://instagram.com/vicorodriguezgz" target="_blank" class="text-brand-accent hover:underline">@vicorodriguezgz</a>), artista plástica y muralista. Me dedico a intervenir paredes y espacios residenciales o comerciales en obras a gran escala, combinando textura, geometría orgánica y fluidez técnica.
                     </p>
 
                     <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">
-                        Entiendo cada superficie —sea una pared de concreto o un lienzo en blanco— como un espacio vivo para conectar emociones y dar carácter único a cualquier ambiente.
+                        Entiendo cada lienzo o muro de mampostería como un elemento vivo capaz de transformar la atmósfera de un ambiente, aportando dinamismo visual y valor estético duradero.
                     </p>
 
-                    <!-- Conditions Summary from Budget PDF -->
-                    <!-- CTRL+F: CONDICIONES_PRESUPUESTO - Resumen oficial de condiciones extraídas de tu PDF -->
-                    <div class="mt-6 p-4 sm:p-5 rounded-xl bg-brand-card/80 border border-brand-accent/20 text-xs sm:text-sm text-gray-300 space-y-2">
-                        <p class="font-bold text-brand-accent text-sm sm:text-base flex items-center gap-2">
-                            <i class="fa-solid fa-file-signature text-amber-400"></i> Proceso de Trabajo & Condiciones (Resumen de Presupuesto):
-                        </p>
-                        <ul class="list-disc list-inside space-y-1.5 text-gray-300 font-light">
-                            <li><strong class="text-white font-medium">Bocetado:</strong> Se entrega un borrador con la estructura y gama cromática. Incluye <span class="text-amber-400 font-semibold">2 instancias de corrección</span>.</li>
-                            <li><strong class="text-white font-medium">Seña de inicio (20%):</strong> Se abonará un 20% para congelar la fecha y realizar el boceto (sin devolución).</li>
-                            <li><strong class="text-white font-medium">Pago en obra:</strong> El 50% restante se abona el día en que se inicia la realización.</li>
-                            <li><strong class="text-white font-medium">Preparación de pared:</strong> La superficie debe estar previamente lista (pintada de blanco o gris).</li>
-                        </ul>
-                    </div>
-
                     <!-- Features Grid -->
-                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="p-4 rounded-xl bg-brand-card border border-white/5">
-                            <div class="w-10 h-10 rounded-lg bg-brand-accent/20 flex items-center justify-center text-brand-accent mb-3">
+                    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-xl bg-brand-card border border-brand-border">
+                            <div class="w-10 h-10 rounded-lg bg-brand-accent/10 flex items-center justify-center text-brand-accent mb-3">
                                 <i class="fa-solid fa-compass-drafting text-lg"></i>
                             </div>
-                            <h4 class="font-bold text-white">Diseños Personalizados</h4>
-                            <p class="text-xs text-gray-400 mt-1">Bocetos previos ajustados a tu espacio e idea.</p>
+                            <h4 class="font-bold text-white text-sm">Bocetos Exclusivos</h4>
+                            <p class="text-xs text-gray-400 mt-1">Cada proyecto se diseña a medida del espacio y de la luz del ambiente.</p>
                         </div>
 
-                        <div class="p-4 rounded-xl bg-brand-card border border-white/5">
-                            <div class="w-10 h-10 rounded-lg bg-brand-accent/20 flex items-center justify-center text-brand-accent mb-3">
+                        <div class="p-4 rounded-xl bg-brand-card border border-brand-border">
+                            <div class="w-10 h-10 rounded-lg bg-brand-accent/10 flex items-center justify-center text-brand-accent mb-3">
                                 <i class="fa-solid fa-shield-halved text-lg"></i>
                             </div>
-                            <h4 class="font-bold text-white">Materiales de Alta Durabilidad</h4>
-                            <p class="text-xs text-gray-400 mt-1">Pintura látex de alta resistencia para interior y exterior.</p>
+                            <h4 class="font-bold text-white text-sm">Alta Durabilidad</h4>
+                            <p class="text-xs text-gray-400 mt-1">Materiales de primera calidad resistentes al paso del tiempo e intemperie.</p>
                         </div>
                     </div>
 
                     <!-- Instagram CTA -->
                     <div class="mt-8 flex items-center gap-4">
-                        <!-- CTRL+F: LINK_INSTAGRAM_BIO -->
-                        <a href="https://instagram.com/vicorodriguezgz" target="_blank" class="inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 px-5 py-3 rounded-xl border border-white/10 transition-all font-semibold">
+                        <a href="https://instagram.com/vicorodriguezgz" target="_blank" class="inline-flex items-center gap-2 text-sm text-gray-200 hover:text-white bg-white/5 hover:bg-white/10 px-6 py-3 rounded-xl border border-white/10 transition-all font-semibold">
                             <i class="fa-brands fa-instagram text-brand-accent text-lg"></i>
-                            Seguir a @vicorodriguezgz
+                            Seguir en Instagram @vicorodriguezgz
                         </a>
                     </div>
                 </div>
@@ -381,24 +425,66 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-brand-dark border-t border-brand-border">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-accent font-semibold text-xs uppercase tracking-widest">Preguntas Frecuentes</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-2">Dudas habituales</h2>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border">
+                    <h3 class="font-bold text-white text-base flex items-center gap-2">
+                        <i class="fa-solid fa-circle-question text-brand-accent"></i>
+                        ¿Cómo debe estar la pared antes de pintar el mural?
+                    </h3>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-2 leading-relaxed pl-6">
+                        La pared debe estar limpia, seca y previamente pintada de un color base (preferentemente blanco o gris claro), libre de humedad o fisuras importantes.
+                    </p>
+                </div>
+
+                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border">
+                    <h3 class="font-bold text-white text-base flex items-center gap-2">
+                        <i class="fa-solid fa-circle-question text-brand-accent"></i>
+                        ¿Haces envíos de cuadros sobre lienzo a todo el país?
+                    </h3>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-2 leading-relaxed pl-6">
+                        ¡Sí! Todas las obras en lienzo se envían cuidadosamente embaladas con protección anti-impacto a cualquier punto del país.
+                    </p>
+                </div>
+
+                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border">
+                    <h3 class="font-bold text-white text-base flex items-center gap-2">
+                        <i class="fa-solid fa-circle-question text-brand-accent"></i>
+                        ¿Cuánto tiempo toma realizar un mural?
+                    </h3>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-2 leading-relaxed pl-6">
+                        Depende de la complejidad y de los metros cuadrados, pero la mayoría de las intervenciones residenciales o comerciales se completan entre 1 y 3 jornadas de trabajo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Quote Section / WhatsApp Generator -->
-    <section id="cotizar" class="py-20 bg-brand-card border-t border-white/10 relative">
+    <section id="cotizar" class="py-20 bg-brand-card border-t border-brand-border relative">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10">
-                <span class="text-brand-accent font-semibold text-sm uppercase tracking-widest">Contacto Directo</span>
-                <h2 class="font-display text-3xl sm:text-5xl font-bold text-white mt-2">Cotizar Proyecto o Obra</h2>
-                <p class="text-gray-400 text-sm sm:text-base mt-2">Completa los datos y conéctate directamente por WhatsApp con el mensaje armado.</p>
+                <span class="text-brand-accent font-semibold text-xs uppercase tracking-widest">Atención Personalizada</span>
+                <h2 class="font-display text-3xl sm:text-5xl font-bold text-white mt-2">Cotizar Proyecto u Obra</h2>
+                <p class="text-gray-400 text-sm sm:text-base mt-2">Completa estos breves datos para generar tu mensaje listo para enviar por WhatsApp.</p>
             </div>
 
             <!-- Interactive Form Card -->
-            <div class="bg-brand-dark p-6 sm:p-10 rounded-3xl border border-white/10 shadow-2xl">
+            <div class="bg-brand-dark p-6 sm:p-10 rounded-3xl border border-brand-border shadow-2xl">
                 <form id="whatsappForm" onsubmit="sendToWhatsApp(event)" class="space-y-6">
                     
                     <!-- Type Selection -->
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">¿Qué te interesa cotizar?</label>
-                        <select id="projectType" class="w-full bg-brand-card border border-white/15 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-accent transition-colors">
-                            <option value="Mural Residencial">Mural Residencial (Casa / Departamento)</option>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">¿Qué te gustaría cotizar?</label>
+                        <select id="projectType" class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-brand-accent transition-colors">
+                            <option value="Mural Residencial">Mural Residencial (Casa / Departamento / Terraza)</option>
                             <option value="Mural Comercial">Mural Comercial (Local / Oficina / Restó)</option>
                             <option value="Cuadro de Colección">Cuadro Disponible de la Galería</option>
                             <option value="Encargo Personalizado">Cuadro Personalizado sobre Lienzo</option>
@@ -409,26 +495,26 @@
                         <!-- Wall/Canvas Size -->
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Medidas Aproximadas</label>
-                            <input type="text" id="projectSize" placeholder="Ej: 3x2 metros o 120x80 cm" class="w-full bg-brand-card border border-white/15 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent transition-colors">
+                            <input type="text" id="projectSize" placeholder="Ej: 3x2 metros o 120x80 cm" class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent transition-colors">
                         </div>
 
                         <!-- Location -->
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Ubicación / Ciudad</label>
-                            <input type="text" id="projectLocation" placeholder="Ej: Buenos Aires, CABA" class="w-full bg-brand-card border border-white/15 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent transition-colors">
+                            <input type="text" id="projectLocation" placeholder="Ej: Buenos Aires, CABA" class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent transition-colors">
                         </div>
                     </div>
 
                     <!-- Idea or Details -->
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Detalles o Idea Visual (Opcional)</label>
-                        <textarea id="projectDetails" rows="3" placeholder="Cuéntame un poco de la idea, colores o temática que buscas..." class="w-full bg-brand-card border border-white/15 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent transition-colors"></textarea>
+                        <textarea id="projectDetails" rows="3" placeholder="Cuéntame un poco sobre la paleta de colores, concepto o ambiente..." class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent transition-colors"></textarea>
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" class="w-full bg-brand-accent hover:bg-brand-accentHover text-white font-bold py-4 rounded-xl transition-all shadow-xl shadow-brand-accent/20 flex items-center justify-center gap-3 text-base">
+                    <button type="submit" class="w-full bg-brand-accent hover:bg-brand-accentHover text-white font-bold py-4 rounded-xl transition-all shadow-xl shadow-brand-accent/25 flex items-center justify-center gap-3 text-base">
                         <i class="fa-brands fa-whatsapp text-2xl"></i>
-                        Enviar Consulta a WhatsApp
+                        Enviar Consulta Directa a WhatsApp
                     </button>
                 </form>
             </div>
@@ -436,15 +522,14 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-brand-dark py-12 border-t border-white/10 text-center text-gray-500 text-xs">
+    <footer class="bg-brand-dark py-12 border-t border-brand-border text-center text-gray-500 text-xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="text-left">
                 <span class="font-display font-extrabold text-lg text-white">VICO RODRÍGUEZ</span>
-                <p class="text-xs text-gray-400 mt-0.5">Murales & Arte Plástico © 2026. Todos los derechos reservados.</p>
+                <p class="text-xs text-gray-400 mt-0.5">Arte Plástico & Murales © 2026. Todos los derechos reservados.</p>
             </div>
 
             <!-- Social Links -->
-            <!-- CTRL+F: ENLACES_REDES_FOOTER -->
             <div class="flex items-center space-x-6 text-lg">
                 <a href="https://instagram.com/vicorodriguezgz" target="_blank" title="Instagram @vicorodriguezgz" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-instagram"></i></a>
                 <a href="#cotizar" title="Cotización Directa" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
@@ -453,13 +538,13 @@
     </footer>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/" target="_blank" id="floating-wa" class="fixed bottom-6 right-6 z-40 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110">
+    <a href="https://wa.me/5491100000000" target="_blank" id="floating-wa" class="fixed bottom-6 right-6 z-40 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110">
         <i class="fa-brands fa-whatsapp text-3xl"></i>
     </a>
 
     <!-- Lightbox Modal -->
     <div id="artModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="relative bg-brand-card border border-white/10 rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl">
+        <div class="relative bg-brand-card border border-brand-border rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl">
             <button onclick="closeModal()" class="absolute top-4 right-4 z-10 text-gray-400 hover:text-white bg-black/50 w-8 h-8 rounded-full flex items-center justify-center">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -468,7 +553,7 @@
                 <span id="modalCategory" class="text-xs font-bold text-brand-accent uppercase tracking-wider"></span>
                 <h3 id="modalTitle" class="font-display text-2xl font-bold text-white mt-1"></h3>
                 <p id="modalSubtitle" class="text-sm text-gray-300 mt-1"></p>
-                <p id="modalTech" class="text-xs text-amber-400 mt-3 font-mono"></p>
+                <p id="modalTech" class="text-xs text-brand-ochre mt-3 font-mono"></p>
 
                 <div class="mt-6 flex justify-end">
                     <button onclick="closeModalAndQuote()" class="bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-bold px-5 py-2.5 rounded-lg transition-all">
@@ -514,7 +599,8 @@
         // WhatsApp Direct Link Generator
         function sendToWhatsApp(e) {
             e.preventDefault();
-            const phone = "5491140450691"; // REPLACE WITH VICO'S REAL WHATSAPP NUMBER
+            // REEMPLAZAR ESTE NÚMERO CON EL NÚMERO REAL DE WHATSAPP CON CÓDIGO DE PAÍS
+            const phone = "5491140450691"; 
             
             const type = document.getElementById('projectType').value;
             const size = document.getElementById('projectSize').value || 'A definir';
