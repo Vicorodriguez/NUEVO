@@ -7,19 +7,21 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
+    <!-- CTRL+F: TIPOGRAFIA_FUENTES - Puedes cambiar las fuentes importadas de Google Fonts aquí -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
+        /* CTRL+F: TIPOGRAFIA_TAILWIND - Ajusta los nombres de las fuentes para títulos (display) y texto base (sans) */
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        display: ['"Syne"', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', '"Montserrat"', 'sans-serif'],
+                        display: ['"Syne"', '"Montserrat"', 'sans-serif'],
                     },
                     colors: {
                         brand: {
@@ -61,8 +63,10 @@
             <!-- Desktop Nav Links -->
             <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-300">
                 <a href="#obras" class="hover:text-brand-accent transition-colors">Obras y Murales</a>
-                <a href="#sobre-mi" class="hover:text-brand-accent transition-colors">Sobre el Artista</a>
+                <a href="#sobre-mi" class="hover:text-brand-accent transition-colors">Sobre la Artista</a>
                 <a href="#cotizar" class="hover:text-brand-accent transition-colors">Cotizar Proyecto</a>
+                <!-- CTRL+F: INSTAGRAM_NAV -->
+                <a href="https://instagram.com/vicorodriguezgz" target="_blank" class="hover:text-brand-accent transition-colors flex items-center gap-1.5"><i class="fa-brands fa-instagram text-brand-accent"></i> @vicorodriguezgz</a>
             </nav>
 
             <!-- Quick WhatsApp CTA -->
@@ -81,8 +85,9 @@
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden bg-brand-card border-b border-white/10 px-4 pt-2 pb-6 space-y-4">
             <a href="#obras" class="block text-gray-300 hover:text-brand-accent py-2 font-medium">Obras y Murales</a>
-            <a href="#sobre-mi" class="block text-gray-300 hover:text-brand-accent py-2 font-medium">Sobre el Artista</a>
+            <a href="#sobre-mi" class="block text-gray-300 hover:text-brand-accent py-2 font-medium">Sobre la Artista</a>
             <a href="#cotizar" class="block text-gray-300 hover:text-brand-accent py-2 font-medium">Cotizar Proyecto</a>
+            <a href="https://instagram.com/vicorodriguezgz" target="_blank" class="block text-gray-300 hover:text-brand-accent py-2 font-medium"><i class="fa-brands fa-instagram mr-2 text-brand-accent"></i>@vicorodriguezgz</a>
             <a href="#cotizar" class="w-full inline-flex items-center justify-center gap-2 bg-brand-accent text-white font-semibold px-5 py-3 rounded-full text-sm">
                 <i class="fa-brands fa-whatsapp text-lg"></i> Cotizar WhatsApp
             </a>
@@ -92,6 +97,7 @@
     <!-- Hero Section -->
     <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden flex items-center min-h-[85vh]">
         <div class="absolute inset-0 z-0">
+            <!-- CTRL+F: IMAGEN_HERO_FONDO - Reemplaza el enlace en 'src' con la foto principal que quieras para la portada -->
             <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1920&q=80" alt="Fondo Arte Vico Rodríguez" class="w-full h-full object-cover opacity-20 filter blur-sm">
             <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-transparent"></div>
         </div>
@@ -168,6 +174,7 @@
                 <!-- Item 1: Mural -->
                 <div class="art-card gallery-item murales group relative bg-brand-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-accent/50 transition-all duration-300">
                     <div class="relative h-80 overflow-hidden">
+                        <!-- CTRL+F: IMAGEN_GALERIA_MURAL_1 -->
                         <img src="https://images.unsplash.com/photo-1561055657-b9e0bf0fa360?auto=format&fit=crop&w=800&q=80" alt="Mural Urbano" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
                             Mural Comercial
@@ -188,6 +195,7 @@
                 <!-- Item 2: Cuadro Disponible -->
                 <div class="art-card gallery-item cuadros group relative bg-brand-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-accent/50 transition-all duration-300">
                     <div class="relative h-80 overflow-hidden">
+                        <!-- CTRL+F: IMAGEN_GALERIA_CUADRO_1 -->
                         <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80" alt="Cuadro Abstracto" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 left-4 bg-emerald-500/90 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                             🔴 Disponible
@@ -208,6 +216,7 @@
                 <!-- Item 3: Mural Residencial -->
                 <div class="art-card gallery-item murales group relative bg-brand-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-accent/50 transition-all duration-300">
                     <div class="relative h-80 overflow-hidden">
+                        <!-- CTRL+F: IMAGEN_GALERIA_MURAL_2 -->
                         <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80" alt="Mural Residencial" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
                             Mural Residencial
@@ -228,6 +237,7 @@
                 <!-- Item 4: Cuadro Coleccion Privada -->
                 <div class="art-card gallery-item cuadros group relative bg-brand-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-accent/50 transition-all duration-300">
                     <div class="relative h-80 overflow-hidden">
+                        <!-- CTRL+F: IMAGEN_GALERIA_CUADRO_2 -->
                         <img src="https://images.unsplash.com/photo-1578926375605-eaf7559b1458?auto=format&fit=crop&w=800&q=80" alt="Cuadro Vendido" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 left-4 bg-gray-600/90 text-white text-xs font-bold px-3 py-1 rounded-full">
                             ⚪ Colección Privada
@@ -248,6 +258,7 @@
                 <!-- Item 5: Mural Interior -->
                 <div class="art-card gallery-item murales group relative bg-brand-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-accent/50 transition-all duration-300">
                     <div class="relative h-80 overflow-hidden">
+                        <!-- CTRL+F: IMAGEN_GALERIA_MURAL_3 -->
                         <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80" alt="Mural Oficina" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
                             Intervención Interior
@@ -268,6 +279,7 @@
                 <!-- Item 6: Cuadro Disponible -->
                 <div class="art-card gallery-item cuadros group relative bg-brand-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-accent/50 transition-all duration-300">
                     <div class="relative h-80 overflow-hidden">
+                        <!-- CTRL+F: IMAGEN_GALERIA_CUADRO_3 -->
                         <img src="https://images.unsplash.com/photo-1549887534-1541e9326642?auto=format&fit=crop&w=800&q=80" alt="Cuadro Texturas" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 left-4 bg-emerald-500/90 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                             🔴 Disponible
@@ -297,7 +309,8 @@
                 <!-- Artist Image Showcase -->
                 <div class="lg:col-span-5 relative">
                     <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                        <img src="https://ibb.co/4npXJBk2" alt="Vico Rodríguez Trabajando" class="w-full h-[500px] object-cover">
+                        <!-- CTRL+F: IMAGEN_SOBRE_MI_VICO - Reemplaza el enlace en 'src' con la foto donde aparezcas pintando o en tu taller -->
+                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80" alt="Vico Rodríguez Trabajando" class="w-full h-[500px] object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent"></div>
                     </div>
                     <div class="absolute -bottom-6 -right-6 bg-brand-card border border-white/10 p-6 rounded-2xl hidden sm:block shadow-xl">
@@ -314,15 +327,29 @@
                     </h2>
 
                     <p class="mt-6 text-gray-300 text-base sm:text-lg leading-relaxed font-light">
-                        Soy <strong class="text-white font-semibold">Vico Rodríguez</strong>, artista plástico y muralista. Me dedico a intervenir paredes y espacios urbanos o residenciales en obras a gran escala, combinando textura, color y fluidez técnica.
+                        Soy <strong class="text-white font-semibold">Vico Rodríguez</strong> (@vicorodriguezgz), artista plástica y muralista. Me dedico a intervenir paredes y espacios urbanos o residenciales en obras a gran escala, combinando textura, color y fluidez técnica.
                     </p>
 
                     <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">
                         Entiendo cada superficie —sea una pared de concreto o un lienzo en blanco— como un espacio vivo para conectar emociones y dar carácter único a cualquier ambiente.
                     </p>
 
+                    <!-- Conditions Summary from Budget PDF -->
+                    <!-- CTRL+F: CONDICIONES_PRESUPUESTO - Resumen oficial de condiciones extraídas de tu PDF -->
+                    <div class="mt-6 p-4 sm:p-5 rounded-xl bg-brand-card/80 border border-brand-accent/20 text-xs sm:text-sm text-gray-300 space-y-2">
+                        <p class="font-bold text-brand-accent text-sm sm:text-base flex items-center gap-2">
+                            <i class="fa-solid fa-file-signature text-amber-400"></i> Proceso de Trabajo & Condiciones (Resumen de Presupuesto):
+                        </p>
+                        <ul class="list-disc list-inside space-y-1.5 text-gray-300 font-light">
+                            <li><strong class="text-white font-medium">Bocetado:</strong> Se entrega un borrador con la estructura y gama cromática. Incluye <span class="text-amber-400 font-semibold">2 instancias de corrección</span>.</li>
+                            <li><strong class="text-white font-medium">Seña de inicio (20%):</strong> Se abonará un 20% para congelar la fecha y realizar el boceto (sin devolución).</li>
+                            <li><strong class="text-white font-medium">Pago en obra:</strong> El 50% restante se abona el día en que se inicia la realización.</li>
+                            <li><strong class="text-white font-medium">Preparación de pared:</strong> La superficie debe estar previamente lista (pintada de blanco o gris).</li>
+                        </ul>
+                    </div>
+
                     <!-- Features Grid -->
-                    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="p-4 rounded-xl bg-brand-card border border-white/5">
                             <div class="w-10 h-10 rounded-lg bg-brand-accent/20 flex items-center justify-center text-brand-accent mb-3">
                                 <i class="fa-solid fa-compass-drafting text-lg"></i>
@@ -336,15 +363,16 @@
                                 <i class="fa-solid fa-shield-halved text-lg"></i>
                             </div>
                             <h4 class="font-bold text-white">Materiales de Alta Durabilidad</h4>
-                            <p class="text-xs text-gray-400 mt-1">Pinturas resistentes al clima interior y exterior.</p>
+                            <p class="text-xs text-gray-400 mt-1">Pintura látex de alta resistencia para interior y exterior.</p>
                         </div>
                     </div>
 
                     <!-- Instagram CTA -->
                     <div class="mt-8 flex items-center gap-4">
-                        <a href="https://instagram.com" target="_blank" class="inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 px-4 py-2.5 rounded-xl border border-white/10 transition-all">
+                        <!-- CTRL+F: LINK_INSTAGRAM_BIO -->
+                        <a href="https://instagram.com/vicorodriguezgz" target="_blank" class="inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 px-5 py-3 rounded-xl border border-white/10 transition-all font-semibold">
                             <i class="fa-brands fa-instagram text-brand-accent text-lg"></i>
-                            Seguir en Instagram
+                            Seguir a @vicorodriguezgz
                         </a>
                     </div>
                 </div>
@@ -416,9 +444,10 @@
             </div>
 
             <!-- Social Links -->
+            <!-- CTRL+F: ENLACES_REDES_FOOTER -->
             <div class="flex items-center space-x-6 text-lg">
-                <a href="https://instagram.com" target="_blank" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://wa.me/" target="_blank" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://instagram.com/vicorodriguezgz" target="_blank" title="Instagram @vicorodriguezgz" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#cotizar" title="Cotización Directa" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
         </div>
     </footer>
