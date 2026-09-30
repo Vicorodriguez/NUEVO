@@ -29,13 +29,13 @@
                     },
                     colors: {
                         brand: {
-                            dark: '#fdfde4',
-                            card: '#fdfde4',
-                            cardHover: '#fdfde4',
+                            dark: '#f9f9ea',
+                            card: '#f9f9ea',
+                            cardHover: '#f9f9ea',
                             accent: '#bf0000',
                             accentHover: '#bf0000',
                             ochre: '#e5a93c',
-                            border: '#fdfde4'
+                            border: '#f9f9ea'
                         }
                     }
                 }
@@ -44,21 +44,21 @@
     </script>
     <style>
         body {
-            background-color: #fdfde4;
+            background-color: #ffffff;
             color: #121111;
         }
         .glass-nav {
-            background: rgba(254, 255, 240, 0.85);
+            background: rgba(253, 253, 252, 0.85);
             backdrop-filter: blur(16px);
         }
         .art-card-overlay {
-            background: linear-gradient(0deg, #cfcbcb 10%, );
+            background: linear-gradient(0deg, #ffffff 10%, );
         }
         .text-glow {
             text-shadow: 0 0 25px rgba(255, 94, 58, 0.35);
         }
         .border-brand-border {
-            background-color: rgb(253 253 228 / 0.85);
+            background-color: rgba(255, 255, 246, 0.85);
         }
     </style>
 </head>
@@ -309,8 +309,8 @@
     </section>
 
     <!-- Work Process Section (Basado en las condiciones del presupuesto) -->
-    <section id="proceso" class="py-20 bg-brand-card/60 border-t border-brand-border relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="proceso" class="py-20 bg-brand-card/60 border-t border-brand-border relative absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/85 to-transparent"">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center justify-center">Metodología Clara</span>
                 <h2 class="font-display text-3xl sm:text-5xl font-bold text-black mt-2">¿Cómo trabajamos tu proyecto?</h2>
@@ -373,7 +373,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="sobre-mi" class="py-24 relative overflow-hidden">
+    <section id="sobre-mi" class="py-24 relative overflow-hidden absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/85 to-transparent"">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
@@ -384,8 +384,8 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent"></div>
                     </div>
                     <div class="absolute -bottom-6 -right-6 bg-brand-card border border-brand-border p-6 rounded-2xl hidden sm:block shadow-2xl">
-                        <p class="font-display text-xl font-bold text-brand-accent">Arte & Gran Formato</p>
-                        <p class="text-xs text-gray-400 mt-1">Para hogares, locales comerciales y coleccionistas</p>
+                        <p class="font-display text-xl font-bold text-brand-accent ">Arte & Gran Formato</p>
+                        <p class="text-xs text-gray-400 mt-1">Para hogares, locales comerciales y mas</p>
                     </div>
                 </div>
 
