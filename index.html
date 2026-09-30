@@ -52,10 +52,13 @@
             backdrop-filter: blur(16px);
         }
         .art-card-overlay {
-            background: linear-gradient(0deg, #cfcbcb 10%, rgba(35, 35, 34, 0.95) 5%, rgba(35, 35, 34, 0.95) 10%);
+            background: linear-gradient(0deg, #cfcbcb 10%, );
         }
         .text-glow {
             text-shadow: 0 0 25px rgba(255, 94, 58, 0.35);
+        }
+        .border-brand-border {
+            background-color: rgb(253 253 228 / 0.85);
         }
     </style>
 </head>
@@ -138,7 +141,7 @@
             </div>
 
             <!-- Highlights Badges -->
-            <div class="mt-16 grid grid-cols-2 md:grid-cols-3 gap-6 border-t border-brand-border pt-8 max-w-2xl">
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-3 gap-6 border-t border-brand-border pt-8 max-w-2xl bg-brand-card p-8 sm:p-10 rounded-2xl border-2 border-white ring-2 ring-white/20 shadow-2xl relative transition-all hover:border-white hover:scale-105">
                 <div>
                     <span class="font-display text-3xl font-bold text-black">100%</span>
                     <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">Diseños Originales</p>
@@ -157,7 +160,7 @@
 
     <!-- Portfolio Gallery Section -->
     <section id="obras" class="py-24 bg-brand-dark border-t border-brand-border">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-brand-card p-8 sm:p-10 rounded-2xl border-2 border-white ring-2 ring-white/20 shadow-2xl relative transition-all hover:border-white hover:scale-105 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
                 <div>
                     <span class="text-brand-accent font-semibold text-xs uppercase tracking-widest">Galería Seleccionada</span>
@@ -309,14 +312,14 @@
     <section id="proceso" class="py-20 bg-brand-card/60 border-t border-brand-border relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-brand-accent font-semibold text-xs uppercase tracking-widest">Metodología Clara</span>
+                <span class="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center justify-center">Metodología Clara</span>
                 <h2 class="font-display text-3xl sm:text-5xl font-bold text-black mt-2">¿Cómo trabajamos tu proyecto?</h2>
                 <p class="text-gray-400 text-sm sm:text-base mt-3">Un proceso ágil y transparente desde la primera idea hasta la pincelada final.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <!-- Step 1 -->
-                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border relative">
+                <div class="bg-brand-card p-8 sm:p-10 rounded-2xl border-2 border-white ring-2 ring-white/20 shadow-2xl relative transition-all hover:border-white hover:scale-105">
                     <span class="text-4xl font-display font-extrabold text-brand-accent/20 absolute top-4 right-4">01</span>
                     <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent text-xl mb-4">
                         <i class="fa-solid fa-comments"></i>
@@ -327,21 +330,36 @@
                     </p>
                 </div>
 
+               
                 <!-- Step 2 -->
-                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border relative">
+                <div class="bg-brand-card p-8 sm:p-10 rounded-2xl border-2 border-white ring-2 ring-white/20 shadow-2xl relative transition-all hover:border-white hover:scale-105">
                     <span class="text-4xl font-display font-extrabold text-brand-accent/20 absolute top-4 right-4">02</span>
                     <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent text-xl mb-4">
                         <i class="fa-solid fa-pen-ruler"></i>
                     </div>
-                    <h3 class="font-bold text-black text-lg">Preparación & Inicio</h3>
+                    <h3 class="font-bold text-black text-lg">Seña (20%) & Bocetado</h3>
                     <p class="text-xs text-gray-400 mt-2 leading-relaxed">
-                        La pared debe estar pintada de blanco o gris previa realización.
+                        Con una seña inicial del 20% congelamos la fecha y diseñamos la propuesta. Incluye <strong class="text-amber-400 font-normal">hasta 2 correcciones</strong>.
                     </p>
                 </div>
 
-                <!-- Step 3 -->
-                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border relative">
+
+               <!-- Step 3 -->
+                <div class="bg-brand-card p-8 sm:p-10 rounded-2xl border-2 border-white ring-2 ring-white/20 shadow-2xl relative transition-all hover:border-white hover:scale-105">
                     <span class="text-4xl font-display font-extrabold text-brand-accent/20 absolute top-4 right-4">03</span>
+                    <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent text-xl mb-4">
+                        <i class="fa-solid fa-paint-roller"></i>
+                    </div>
+                    <h3 class="font-bold text-black text-lg">Preparación & Inicio</h3>
+                    <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                        La pared debe estar pintada de blanco o gris previa realización. El saldo restante (50%) se abona el día que arranca la obra.
+                    </p>
+                </div>
+
+
+                <!-- Step 4 -->
+                <div class="bg-brand-card p-8 sm:p-10 rounded-2xl border-2 border-white ring-2 ring-white/20 shadow-2xl relative transition-all hover:border-white hover:scale-105">
+                    <span class="text-4xl font-display font-extrabold text-brand-accent/20 absolute top-4 right-4">04</span>
                     <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent text-xl mb-4">
                         <i class="fa-solid fa-paint-roller"></i>
                     </div>
@@ -420,7 +438,7 @@
 
     <!-- FAQ Section -->
     <section id="faq" class="py-20 bg-brand-dark border-t border-brand-border">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 bg-brand-card p-8 sm:p-10 rounded-2xl border-2 border-white ring-2 ring-white/20 shadow-2xl relative transition-all hover:border-white hover:scale-105">
             <div class="text-center mb-12">
                 <span class="text-brand-accent font-semibold text-xs uppercase tracking-widest">Preguntas Frecuentes</span>
                 <h2 class="font-display text-3xl sm:text-4xl font-bold text-black mt-2">Dudas habituales</h2>
