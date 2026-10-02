@@ -1,659 +1,849 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vico Rodríguez | Murales & Arte Plástico</title>
+    <title>Vico Rodríguez — Artista Visual, Pintora & Muralista</title>
+
     <!-- Tailwind CSS CDN -->
-     <link rel="icon" type="image/png" href="img/favicon2.png">
     <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-<!-- FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
+    <!-- Tailwind Custom Configuration -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['"Jost"', 'sans-serif'],
-                        display: ['"Syne"', 'sans-serif'],
-                        serif: ['"Jost"', 'serif'],
-                    },
                     colors: {
-                        brand: {
-                            dark: '#f9f9ea',
-                            card: '#f9f9ea',
-                            cardHover: '#f9f9ea',
-                            accent: '#bf0000',
-                            accentHover: '#bf0000',
-                            ochre: '#e5a93c',
-                            border: '#f9f9ea'
+                        vico: {
+                            bg: '#FAF9F6',
+                            card: '#FFFFFF',
+                            surface: '#F3F2EE',
+                            border: '#E6E4DF',
+                            borderDark: '#D1CEB8',
+                            text: '#191918',
+                            muted: '#686763',
+                            gold: '#B89248',
+                            goldHover: '#9E7A36',
+                            goldLight: '#F7F4EC'
                         }
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
                     }
                 }
             }
         }
     </script>
+
     <style>
         body {
-            background-color: #ffffff;
-            color: #121111;
+            background-color: #FAF9F6;
+            color: #191918;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
-        .glass-nav {
-            background: rgba(253, 253, 252, 0.85);
-            backdrop-filter: blur(16px);
+
+        /* Minimalist scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
         }
-        .art-card-overlay {
-            background: linear-gradient(0deg, #ffffff 10%, );
+        ::-webkit-scrollbar-track {
+            background: #FAF9F6;
         }
-        .text-glow {
-            text-shadow: 0 0 25px rgba(255, 94, 58, 0.35);
+        ::-webkit-scrollbar-thumb {
+            background: #D1CEB8;
+            border-radius: 3px;
         }
-        .border-brand-border {
-            background-color: rgba(255, 255, 246, 0.85);
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B89248;
+        }
+
+        .champagne-gradient-text {
+            background: linear-gradient(135deg, #191918 20%, #B89248 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .img-hover-zoom {
+            overflow: hidden;
+        }
+        .img-hover-zoom img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .img-hover-zoom:hover img {
+            transform: scale(1.04);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-active {
+            border-bottom: 2px solid #B89248;
+            color: #191918;
+            font-weight: 500;
         }
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-brand-accent selection:text-black">
+<body class="bg-vico-bg text-vico-text antialiased selection:bg-vico-gold/20 selection:text-vico-text min-h-screen flex flex-col justify-between">
 
-    <!-- Header Navigation -->
-    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-brand-border transition-all duration-300">
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <header class="sticky top-0 z-40 bg-vico-bg/90 backdrop-blur-md border-b border-vico-border/80 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" class="flex flex-col">
-                <span class="font-display font-extrabold text-2xl tracking-wider text-black uppercase">Vico Art</span>
-                <span class="text-[10px] text-brand-accent tracking-widest uppercase font-semibold">Arte Plástico & Gran Formato</span>
+            <!-- Logo Marca -->
+            <a href="#" class="group flex flex-col">
+                <span class="font-serif text-2xl sm:text-3xl tracking-widest text-vico-text group-hover:text-vico-gold transition-colors font-medium">VICO RODRÍGUEZ</span>
+                <span class="text-[10px] tracking-[0.25em] text-vico-muted uppercase -mt-1 font-light">Artista Visual & Pintora</span>
             </a>
 
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-black-300">
-                <a href="#obras" class="hover:text-brand-accent transition-colors">Obras y Murales</a>
-                <a href="#proceso" class="hover:text-brand-accent transition-colors">Proceso de Trabajo</a>
-                <a href="#sobre-mi" class="hover:text-brand-accent transition-colors">Sobre la Artista</a>
-                <a href="#faq" class="hover:text-brand-accent transition-colors">Preguntas Frecuentes</a>
-                <a href="https://instagram.com/vicorodriguezgz" target="_blank" class="hover:text-brand-accent transition-colors flex items-center gap-1.5 text-xs bg-black/5 px-3 py-1.5 rounded-full border border-black/10">
-                    <i class="fa-brands fa-instagram text-brand-accent"></i> @vicorodriguezgz
-                </a>
+            <!-- Enlaces de Navegación Escritorio -->
+            <nav class="hidden md:flex items-center space-x-9 text-xs tracking-widest uppercase font-medium text-vico-muted">
+                <a href="#obras" class="hover:text-vico-text transition-colors py-1">Obras</a>
+                <a href="#cotizador" class="hover:text-vico-text transition-colors py-1">Encargos</a>
+                <a href="#tecnica" class="hover:text-vico-text transition-colors py-1">Proceso & Técnica</a>
+                <a href="#bio" class="hover:text-vico-text transition-colors py-1">Trayectoria</a>
+                <a href="#faq" class="hover:text-vico-text transition-colors py-1">FAQ</a>
+                <a href="#contacto" class="hover:text-vico-text transition-colors py-1">Contacto</a>
             </nav>
 
-            <!-- Quick Action CTA -->
-            <a href="#cotizar" class="hidden sm:inline-flex items-center gap-2 bg-brand-accent hover:bg-brand-accentHover text-white font-semibold px-5 py-2.5 rounded-full text-sm transition-all shadow-lg shadow-brand-accent/20">
-                <i class="fa-brands fa-whatsapp text-lg"></i>
-                <span>Cotizar Proyecto</span>
-            </a>
+            <!-- Acciones -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#cotizador" class="bg-vico-text hover:bg-vico-gold text-white hover:text-vico-text text-xs uppercase tracking-widest font-medium px-5 py-2.5 rounded transition-all duration-300">
+                    Solicitar Encargo
+                </a>
+            </div>
 
-            <!-- Mobile Menu Toggle -->
-            <button id="menu-btn" class="md:hidden text-2xl text-gray-300 hover:text-black focus:outline-none">
-                <i class="fa-solid fa-bars"></i>
+            <!-- Botón Menú Móvil -->
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-vico-text hover:text-vico-gold text-2xl focus:outline-none p-2" aria-label="Abrir Menú">
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
             </button>
         </div>
 
-        <!-- Mobile Dropdown Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-brand-card border-b border-brand-border px-4 pt-3 pb-6 space-y-4">
-            <a href="#obras" class="block text-gray-300 hover:text-brand-accent py-2 font-medium">Obras & Murales</a>
-            <a href="#proceso" class="block text-gray-300 hover:text-brand-accent py-2 font-medium">Proceso de Trabajo</a>
-            <a href="#sobre-mi" class="block text-gray-300 hover:text-brand-accent py-2 font-medium">Sobre la Artista</a>
-            <a href="#faq" class="block text-gray-300 hover:text-brand-accent py-2 font-medium">Preguntas Frecuentes</a>
-            <a href="https://instagram.com/vicorodriguezgz" target="_blank" class="block text-gray-300 hover:text-brand-accent py-2 font-medium"><i class="fa-brands fa-instagram mr-2 text-brand-accent"></i>@vicorodriguezgz</a>
-            <a href="#cotizar" class="w-full inline-flex items-center justify-center gap-2 bg-brand-accent text-whhite font-semibold px-5 py-3 rounded-full text-sm">
-                <i class="fa-brands fa-whatsapp text-lg"></i> Cotizar WhatsApp
-            </a>
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-vico-card border-b border-vico-border px-6 py-6 space-y-4 text-center tracking-widest uppercase text-xs font-medium">
+            <a href="#obras" onclick="toggleMobileMenu()" class="block py-2.5 hover:text-vico-gold border-b border-vico-border/50">Obras</a>
+            <a href="#cotizador" onclick="toggleMobileMenu()" class="block py-2.5 hover:text-vico-gold border-b border-vico-border/50">Encargos</a>
+            <a href="#tecnica" onclick="toggleMobileMenu()" class="block py-2.5 hover:text-vico-gold border-b border-vico-border/50">Proceso & Técnica</a>
+            <a href="#bio" onclick="toggleMobileMenu()" class="block py-2.5 hover:text-vico-gold border-b border-vico-border/50">Trayectoria</a>
+            <a href="#faq" onclick="toggleMobileMenu()" class="block py-2.5 hover:text-vico-gold border-b border-vico-border/50">FAQ</a>
+            <a href="#contacto" onclick="toggleMobileMenu()" class="block py-2.5 hover:text-vico-gold">Contacto</a>
+            <div class="pt-4 flex justify-center">
+                <a href="#cotizador" onclick="toggleMobileMenu()" class="bg-vico-text text-white font-medium text-xs uppercase tracking-widest px-6 py-2.5 rounded w-full">Solicitar Encargo</a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden flex items-center min-h-[88vh]">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1920&q=80" alt="Fondo Arte Vico Rodríguez" class="w-full h-full object-cover opacity-15 filter blur-xs">
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/85 to-transparent"></div>
-        </div>
+    <main class="flex-grow">
+        <section class="relative min-h-[82vh] flex items-center justify-center border-b border-vico-border/60 py-20 px-4 overflow-hidden">
+            <!-- Luz Ambiental Soft -->
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-vico-gold/5 via-vico-bg to-vico-bg pointer-events-none"></div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/30 text-brand-accent text-xs font-semibold uppercase tracking-widest mb-6">
-                <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
-                Portafolio Oficial & Encargos Directos
+            <div class="max-w-5xl mx-auto text-center relative z-10 space-y-8">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-vico-gold/40 bg-vico-goldLight text-vico-text text-xs tracking-widest uppercase font-medium">
+                    <span class="w-2 h-2 rounded-full bg-vico-gold animate-pulse"></span>
+                    <span>Taller Abierto para Encargos Personalizados</span>
+                </div>
+
+                <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-[1.12] text-vico-text">
+                    Realismo Contemporáneo & <br>
+                    <span class="font-serif italic font-light champagne-gradient-text">Exploración Botánica y Fauna</span>
+                </h1>
+
+                <p class="max-w-2xl mx-auto text-vico-muted text-base sm:text-lg font-light leading-relaxed tracking-wide">
+                    Pinturas al óleo sobre soportes de conservación, estudios botánicos minuciosos y proyectos murales de gran formato. Dedicados a capturar la serenidad de la naturaleza viva.
+                </p>
+
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
+                    <a href="#cotizador" class="w-full sm:w-auto bg-vico-text hover:bg-vico-gold text-white hover:text-vico-text text-xs uppercase tracking-widest font-semibold px-8 py-4 rounded transition-all duration-300 flex items-center justify-center gap-2.5 shadow-sm">
+                        <span>Calculador de Encargos</span>
+                        <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                    </a>
+                    <a href="#obras" class="w-full sm:w-auto border border-vico-borderDark hover:border-vico-text text-vico-text text-xs uppercase tracking-widest font-medium px-8 py-4 rounded transition-all bg-white flex items-center justify-center">
+                        Explorar Galería
+                    </a>
+                </div>
+
+                <!-- Tarjetas Informativas Destacadas -->
+                <div class="pt-16 grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-vico-border text-left max-w-4xl mx-auto">
+                    <div>
+                        <p class="text-[11px] text-vico-muted uppercase tracking-widest font-medium">Enfoque Artístico</p>
+                        <p class="font-serif text-lg sm:text-xl text-vico-text">Fauna & Flora Autóctona</p>
+                    </div>
+                    <div>
+                        <p class="text-[11px] text-vico-muted uppercase tracking-widest font-medium">Técnicas</p>
+                        <p class="font-serif text-lg sm:text-xl text-vico-text">Óleos, Acrílicos, Murales</p>
+                    </div>
+                    <div>
+                        <p class="text-[11px] text-vico-muted uppercase tracking-widest font-medium">Soporte</p>
+                        <p class="font-serif text-lg sm:text-xl text-vico-text">Paneles ACM & Lienzo</p>
+                    </div>
+                    <div>
+                        <p class="text-[11px] text-vico-muted uppercase tracking-widest font-medium">Envíos</p>
+                        <p class="font-serif text-lg sm:text-xl text-vico-text">Asegurados a Todo el Mundo</p>
+                    </div>
+                </div>
             </div>
-            
-            <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold text-black leading-tight max-w-4xl tracking-tight">
-                Transformando muros y espacios en <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-amber-400 to-brand-ochre text-glow">experiencias visuales</span>
-            </h1>
-            
-            <p class="mt-6 text-lg sm:text-xl text-black-300 max-w-2xl font-light leading-relaxed">
-                Intervenciones murales a gran escala para proyectos residenciales y comerciales, junto con colecciones exclusivas sobre lienzo.
-            </p>
+        </section>
 
-            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
-                <a href="#cotizar" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-brand-accent hover:bg-brand-accentHover text-white text-base font-bold px-8 py-4 rounded-xl transition-all shadow-xl shadow-brand-accent/25 hover:scale-105">
-                    <i class="fa-brands fa-whatsapp text-xl"></i>
-                    Cotizar mi Mural o Cuadro
-                </a>
-                <a href="#obras" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-black/5 hover:bg-black/10 text-black text-base font-semibold px-8 py-4 rounded-xl border border-black/10 transition-all">
-                    Ver Portafolio
-                    <i class="fa-solid fa-arrow-down text-sm"></i>
-                </a>
-            </div>
-
-            <!-- Highlights Badges -->
-            <div class="mt-16 grid grid-cols-2 md:grid-cols-3 gap-6 border-t border-brand-border pt-8 max-w-2xl bg-brand-card p-8 sm:p-10 rounded-2xl border-2 border-white ring-2 ring-white/20 shadow-2xl relative transition-all hover:border-white hover:scale-105">
+        <section id="obras" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-vico-border/60">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                 <div>
-                    <span class="font-display text-3xl font-bold text-black">100%</span>
-                    <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">Diseños Originales</p>
-                </div>
-                <div>
-                    <span class="font-display text-3xl font-bold text-black">Murales</span>
-                    <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">Interiores & Exteriores</p>
-                </div>
-                <div class="col-span-2 md:col-span-1">
-                    <span class="font-display text-3xl font-bold text-black">Lienzos</span>
-                    <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">A medida & Envíos</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Gallery Section -->
-    <section id="obras" class="py-24 bg-brand-dark border-t border-brand-border">
-        <div class="bg-brand-card p-8 sm:p-10 rounded-2xl border-2 border-white ring-2 ring-white/20 shadow-2xl relative transition-all hover:border-white hover:scale-105 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-                <div>
-                    <span class="text-brand-accent font-semibold text-xs uppercase tracking-widest">Galería Seleccionada</span>
-                    <h2 class="font-display text-3xl sm:text-5xl font-bold text-black mt-1">Murales & Cuadros</h2>
+                    <h2 class="text-xs text-vico-gold uppercase tracking-[0.25em] font-medium mb-2">Colección Seleccionada</h2>
+                    <p class="font-serif text-3xl sm:text-5xl text-vico-text">Obras Destacadas</p>
                 </div>
 
-                <!-- Filter Tabs -->
-                <div class="mt-6 md:mt-0 flex flex-wrap gap-2 bg-brand-card p-1.5 rounded-xl border border-brand-border">
-                    <button onclick="filterWorks('all')" class="filter-btn active text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-lg transition-all bg-brand-accent text-black" data-filter="all">
-                        Todos
-                    </button>
-                    <button onclick="filterWorks('murales')" class="filter-btn text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-lg transition-all text-gray-400 hover:text-black" data-filter="murales">
-                        Murales
-                    </button>
-                    <button onclick="filterWorks('cuadros')" class="filter-btn text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-lg transition-all text-gray-400 hover:text-black" data-filter="cuadros">
-                        Cuadros
-                    </button>
+                <!-- Botones de Filtro -->
+                <div id="filter-buttons" class="flex flex-wrap gap-2 text-xs uppercase tracking-wider font-medium">
+                    <button onclick="filterGallery('todos')" class="filter-btn active-filter px-4 py-2 rounded border border-vico-gold bg-vico-gold text-white transition-all">Todas</button>
+                    <button onclick="filterGallery('oleos')" class="filter-btn px-4 py-2 rounded border border-vico-border hover:border-vico-gold text-vico-muted hover:text-vico-text bg-white transition-all">Óleos</button>
+                    <button onclick="filterGallery('murales')" class="filter-btn px-4 py-2 rounded border border-vico-border hover:border-vico-gold text-vico-muted hover:text-vico-text bg-white transition-all">Murales</button>
+                    <button onclick="filterGallery('estudios')" class="filter-btn px-4 py-2 rounded border border-vico-border hover:border-vico-gold text-vico-muted hover:text-vico-text bg-white transition-all">Estudios de Naturaleza</button>
                 </div>
             </div>
 
-            <!-- Gallery Grid -->
+            <!-- Grilla de la Galería -->
             <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Item 1: Mural Comercial -->
-                <div class="art-card gallery-item murales group relative bg-brand-card rounded-2xl overflow-hidden border border-brand-border hover:border-brand-accent/50 transition-all duration-300">
-                    <div class="relative h-80 overflow-hidden">
-                        <img src="img/bairesdetalle.jpg" alt="Mural Urbano Comercial" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-black/70 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-black/20">
-                            Mural Comercial
-                        </span>
-                        <div class="art-card-overlay absolute inset-0 flex flex-col justify-end p-6">
-                            <h3 class="font-display text-xl font-bold text-black">Energía Urbana</h3>
-                            <p class="text-xs text-gray-300 mt-0.5">Club deportivo, Mataderos</p>
-                            <div class="flex items-center justify-between mt-4">
-                                <span class="text-xs text-brand-ochre font-medium"><i class="fa-solid fa-paint-roller mr-1"></i> Acrílico & Spray</span>
-                                <button onclick="openModal('Energía Urbana', 'Club deportivo, Mataderos', 'Acrílico y Aerosol sintético sobre mampostería exterior', 'img/bdetalle.jpg', 'Mural Comercial')" class="text-xs font-bold text-black bg-black/20 hover:bg-brand-accent px-3 py-1.5 rounded-lg backdrop-blur-sm transition-all">
-                                    Ver Detalle
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item 2: Cuadro Disponible -->
-                <div class="art-card gallery-item cuadros group relative bg-brand-card rounded-2xl overflow-hidden border border-brand-border hover:border-brand-accent/50 transition-all duration-300">
-                    <div class="relative h-80 overflow-hidden">
-                        <img src="img/caballoninio.jpg" alt="Cuadro Abstracto" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-emerald-500/90 text-black text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                            🔴 Disponible
-                        </span>
-                        <div class="art-card-overlay absolute inset-0 flex flex-col justify-end p-6">
-                            <h3 class="font-display text-xl font-bold text-black">Caballo Niño</h3>
-                            <p class="text-xs text-gray-300 mt-0.5">120 x 90 cm — Téxtura sobre Lienzo</p>
-                            <div class="flex items-center justify-between mt-4">
-                                <span class="text-xs text-gray-300 font-medium">Obra Original</span>
-                                <a href="#cotizar" onclick="selectWorkForQuote('Cuadro: Caballo Niño')" class="text-xs font-bold text-black bg-brand-accent hover:bg-brand-accentHover px-3 py-1.5 rounded-lg transition-all">
-                                    Consultar
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item 3: Mural Residencial -->
-                <div class="art-card gallery-item murales group relative bg-brand-card rounded-2xl overflow-hidden border border-brand-border hover:border-brand-accent/50 transition-all duration-300">
-                    <div class="relative h-80 overflow-hidden">
-                        <img src="img/tortugamuralazul.jpg" alt="Mural Residencial" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-black/70 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-black/20">
-                            Mural Residencial
-                        </span>
-                        <div class="art-card-overlay absolute inset-0 flex flex-col justify-end p-6">
-                            <h3 class="font-display text-xl font-bold text-black">Tortuga marina</h3>
-                            <p class="text-xs text-gray-300 mt-0.5">Terraza Privada, Belgrano</p>
-                            <div class="flex items-center justify-between mt-4">
-                                <span class="text-xs text-brand-ochre font-medium"><i class="fa-solid fa-brush mr-1"></i> Gran Formato</span>
-                                <button onclick="openModal('Tortuga marina', 'Terraza Privada, Belgrano', 'Técnica mixta con látex de alta resistencia intemperie', 'img/tortugamuralazul.jpg', 'Mural Residencial')" class="text-xs font-bold text-black bg-black/20 hover:bg-brand-accent px-3 py-1.5 rounded-lg backdrop-blur-sm transition-all">
-                                    Ver Detalle
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item 4: Cuadro VENDIDO / Encargo -->
-                <div class="art-card gallery-item cuadros group relative bg-brand-card rounded-2xl overflow-hidden border border-brand-border hover:border-brand-accent/50 transition-all duration-300">
-                    <div class="relative h-80 overflow-hidden">
-                        <img src="img/messi2.jpg" alt="Cuadro Vendido" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-gray-700/90 text-gray-200 text-xs font-bold px-3 py-1 rounded-full">
-                            ⚪ Colección Privada
-                        </span>
-                        <div class="art-card-overlay absolute inset-0 flex flex-col justify-end p-6">
-                            <h3 class="font-display text-xl font-bold text-black">Retrato Messi</h3>
-                            <p class="text-xs text-gray-300 mt-0.5">30x20 cm — Oleo</p>
-                            <div class="flex items-center justify-between mt-4">
-                                <span class="text-xs text-gray-400">Vendido</span>
-                                <a href="#cotizar" onclick="selectWorkForQuote('Encargo similar a Retrato Messi')" class="text-xs font-bold text-black bg-black/20 hover:bg-brand-accent px-3 py-1.5 rounded-lg transition-all">
-                                    Encargar Similar
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item 5: Mural Interior Oficina -->
-                <div class="art-card gallery-item murales group relative bg-brand-card rounded-2xl overflow-hidden border border-brand-border hover:border-brand-accent/50 transition-all duration-300">
-                    <div class="relative h-80 overflow-hidden">
-                        <img src="img/florpiba.png" alt="Mural Oficina" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-black/70 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-black/20">
-                            Intervención Interior
-                        </span>
-                        <div class="art-card-overlay absolute inset-0 flex flex-col justify-end p-6">
-                            <h3 class="font-display text-xl font-bold text-black">Mural Exterior</h3>
-                            <p class="text-xs text-gray-300 mt-0.5">Creativo</p>
-                            <div class="flex items-center justify-between mt-4">
-                                <span class="text-xs text-brand-ochre font-medium"><i class="fa-solid fa-paintbrush mr-1"></i> Diseño a medida</span>
-                                <button onclick="openModal('Lumina Studio', 'Oficinas Creativas', 'Pintura plástica y juego de volúmenes', 'img/florpiba.png', 'Intervención Interior')" class="text-xs font-bold text-black bg-black/20 hover:bg-brand-accent px-3 py-1.5 rounded-lg backdrop-blur-sm transition-all">
-                                    Ver Detalle
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item 6: Cuadro Disponible -->
-                <div class="art-card gallery-item cuadros group relative bg-brand-card rounded-2xl overflow-hidden border border-brand-border hover:border-brand-accent/50 transition-all duration-300">
-                    <div class="relative h-80 overflow-hidden">
-                        <img src="img/lola2.jpg" alt="Cuadro Texturas Pan de Oro" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-emerald-500/90 text-black text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                            🔴 Disponible para cotizar
-                        </span>
-                        <div class="art-card-overlay absolute inset-0 flex flex-col justify-end p-6">
-                            <h3 class="font-display text-xl font-bold text-black">Retratos de Mascotas</h3>
-                            <p class="text-xs text-gray-300 mt-0.5"></p>
-                            <div class="flex items-center justify-between mt-4">
-                                <span class="text-xs text-gray-300 font-medium">Obra Original</span>
-                                <a href="#cotizar" onclick="selectWorkForQuote('Cuadro: Retrato de Mascota')" class="text-xs font-bold text-black bg-black/20 hover:bg-brand-accent px-3 py-1.5 rounded-lg transition-all">
-                                    Consultar
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                <!-- Inyectado mediante JavaScript -->
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Work Process Section (Basado en las condiciones del presupuesto) -->
-    <section id="proceso" class="py-20 bg-brand-card/60 border-t border-brand-border relative absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/85 to-transparent"">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center justify-center">Metodología Clara</span>
-                <h2 class="font-display text-3xl sm:text-5xl font-bold text-black mt-2">¿Cómo trabajamos tu proyecto?</h2>
-                <p class="text-gray-400 text-sm sm:text-base mt-3">Un proceso ágil y transparente desde la primera idea hasta la pincelada final.</p>
-            </div>
-
-             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <!-- Step 1 -->
-                <div class="bg-brand-card p-8 sm:p-10 rounded-2xl border-2 border-white ring-2 ring-white/20 shadow-2xl relative transition-all hover:border-white hover:scale-105">
-                    <span class="text-4xl font-display font-extrabold text-brand-accent/20 absolute top-4 right-4">01</span>
-                    <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent text-xl mb-4">
-                        <i class="fa-solid fa-comments"></i>
-                    </div>
-                    <h3 class="font-bold text-black text-lg">Consulta & Cotización</h3>
-                    <p class="text-xs text-gray-400 mt-2 leading-relaxed">
-                        Evaluamos las medidas, la ubicación y la idea general de tu espacio para entregarte un presupuesto estimado.
+        <section id="cotizador" class="py-24 bg-vico-surface border-b border-vico-border/60">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <span class="text-xs text-vico-gold uppercase tracking-[0.25em] font-medium">Obras Personalizadas</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl text-vico-text">Cotizador de Encargos</h2>
+                    <p class="text-vico-muted text-sm sm:text-base font-light">
+                        Configure las dimensiones y parámetros para calcular una estimación de tiempo de estudio e inversión aproximada en tiempo real.
                     </p>
                 </div>
 
-               
-                <!-- Step 2 -->
-                <div class="bg-brand-card p-8 sm:p-10 rounded-2xl border-2 border-white ring-2 ring-white/20 shadow-2xl relative transition-all hover:border-white hover:scale-105">
-                    <span class="text-4xl font-display font-extrabold text-brand-accent/20 absolute top-4 right-4">02</span>
-                    <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent text-xl mb-4">
-                        <i class="fa-solid fa-pen-ruler"></i>
-                    </div>
-                    <h3 class="font-bold text-black text-lg">Seña & Bocetado</h3>
-                    <p class="text-xs text-gray-400 mt-2 leading-relaxed">
-                        Con una seña inicial del congelamos la fecha y diseñamos la propuesta. Incluye <strong class="text-amber-400 font-normal">hasta 2 correcciones</strong>.
-                    </p>
-                </div>
+                <div class="bg-white border border-vico-border rounded-xl p-6 sm:p-10 shadow-lg">
+                    <form id="calculator-form" oninput="calculateEstimate()">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Columna Izquierda: Opciones -->
+                            <div class="space-y-6">
+                                <!-- Tipo de Obra -->
+                                <div>
+                                    <label class="block text-xs uppercase tracking-widest text-vico-muted font-medium mb-3">1. Técnica / Formato</label>
+                                    <div class="grid grid-cols-3 gap-2 text-center">
+                                        <label class="cursor-pointer">
+                                            <input type="radio" name="format" value="panel" checked class="sr-only peer">
+                                            <div class="p-3 border border-vico-border rounded peer-checked:border-vico-gold peer-checked:bg-vico-goldLight transition-all">
+                                                <i class="fa-solid fa-square-full text-sm text-vico-gold mb-1 block"></i>
+                                                <span class="text-xs font-medium block">Óleo / Panel</span>
+                                            </div>
+                                        </label>
+                                        <label class="cursor-pointer">
+                                            <input type="radio" name="format" value="mural" class="sr-only peer">
+                                            <div class="p-3 border border-vico-border rounded peer-checked:border-vico-gold peer-checked:bg-vico-goldLight transition-all">
+                                                <i class="fa-solid fa-paint-roller text-sm text-vico-gold mb-1 block"></i>
+                                                <span class="text-xs font-medium block">Mural Pared</span>
+                                            </div>
+                                        </label>
+                                        <label class="cursor-pointer">
+                                            <input type="radio" name="format" value="study" class="sr-only peer">
+                                            <div class="p-3 border border-vico-border rounded peer-checked:border-vico-gold peer-checked:bg-vico-goldLight transition-all">
+                                                <i class="fa-solid fa-leaf text-sm text-vico-gold mb-1 block"></i>
+                                                <span class="text-xs font-medium block">Estudio Papel</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
 
+                                <!-- Dimensiones -->
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <label class="text-xs uppercase tracking-widest text-vico-muted font-medium">2. Dimensiones (cm)</label>
+                                        <span id="dimension-text" class="text-xs font-mono text-vico-gold font-medium">50 × 70 cm</span>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <span class="text-[10px] text-vico-muted uppercase block mb-1">Ancho (cm)</span>
+                                            <input type="number" id="width-cm" value="50" min="20" max="500" class="w-full bg-vico-bg border border-vico-border rounded p-2.5 text-xs text-vico-text focus:outline-none focus:border-vico-gold">
+                                        </div>
+                                        <div>
+                                            <span class="text-[10px] text-vico-muted uppercase block mb-1">Alto (cm)</span>
+                                            <input type="number" id="height-cm" value="70" min="20" max="500" class="w-full bg-vico-bg border border-vico-border rounded p-2.5 text-xs text-vico-text focus:outline-none focus:border-vico-gold">
+                                        </div>
+                                    </div>
+                                </div>
 
-               <!-- Step 3 -->
-                <div class="bg-brand-card p-8 sm:p-10 rounded-2xl border-2 border-white ring-2 ring-white/20 shadow-2xl relative transition-all hover:border-white hover:scale-105">
-                    <span class="text-4xl font-display font-extrabold text-brand-accent/20 absolute top-4 right-4">03</span>
-                    <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent text-xl mb-4">
-                        <i class="fa-solid fa-paint-roller"></i>
-                    </div>
-                    <h3 class="font-bold text-black text-lg">Preparación & Inicio</h3>
-                    <p class="text-xs text-gray-400 mt-2 leading-relaxed">
-                        La pared debe estar pintada de blanco o gris previa realización. El saldo restante se abona el día que arranca la obra.
-                    </p>
-                </div>
+                                <!-- Nivel de Detalle / Complejidad -->
+                                <div>
+                                    <label class="block text-xs uppercase tracking-widest text-vico-muted font-medium mb-2">3. Complejidad del Tema</label>
+                                    <select id="complexity" class="w-full bg-vico-bg border border-vico-border rounded p-3 text-xs text-vico-text focus:outline-none focus:border-vico-gold">
+                                        <option value="1">Estudio Botánico o Animal Individual (Estándar)</option>
+                                        <option value="1.3">Paisaje Realista con Fauna (+30%)</option>
+                                        <option value="1.6">Composición Compleja Hiperrealista / Escena Múltiple (+60%)</option>
+                                    </select>
+                                </div>
 
+                                <!-- Adicionales -->
+                                <div>
+                                    <label class="block text-xs uppercase tracking-widest text-vico-muted font-medium mb-2">4. Opciones Adicionales</label>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center gap-2 text-xs text-vico-text cursor-pointer">
+                                            <input type="checkbox" id="addon-frame" class="accent-vico-gold">
+                                            <span>Marco Flotante Artesanal en Madera (+ $220 USD)</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 text-xs text-vico-text cursor-pointer">
+                                            <input type="checkbox" id="addon-express" class="accent-vico-gold">
+                                            <span>Turno de Taller Prioritario (+ $300 USD)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
 
-                <!-- Step 4 -->
-                <div class="bg-brand-card p-8 sm:p-10 rounded-2xl border-2 border-white ring-2 ring-white/20 shadow-2xl relative transition-all hover:border-white hover:scale-105">
-                    <span class="text-4xl font-display font-extrabold text-brand-accent/20 absolute top-4 right-4">04</span>
-                    <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent text-xl mb-4">
-                        <i class="fa-solid fa-paint-roller"></i>
-                    </div>
-                    <h3 class="font-bold text-black text-lg">Entrega & Barnizado</h3>
-                    <p class="text-xs text-gray-400 mt-2 leading-relaxed">
-                        Aplicamos sellador de protección para garantizar máxima durabilidad en interiores o intemperie. ¡Muro listo!
-                    </p>
+                            <!-- Columna Derecha: Resumen en Vivo -->
+                            <div class="bg-vico-bg border border-vico-border rounded-lg p-6 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="font-serif text-2xl text-vico-text border-b border-vico-border pb-3 mb-4">Desglose Estimado</h3>
+                                    
+                                    <div class="space-y-3 text-xs">
+                                        <div class="flex justify-between text-vico-muted">
+                                            <span>Superficie Total:</span>
+                                            <span id="calc-area" class="font-mono text-vico-text">0.35 m²</span>
+                                        </div>
+                                        <div class="flex justify-between text-vico-muted">
+                                            <span>Tiempo de Elaboración:</span>
+                                            <span id="calc-time" class="font-mono text-vico-text">3–4 Semanas</span>
+                                        </div>
+                                        <div class="flex justify-between text-vico-muted">
+                                            <span>Materiales de Conservación:</span>
+                                            <span class="font-mono text-vico-text">Incluidos</span>
+                                        </div>
+                                        <div class="flex justify-between text-vico-muted">
+                                            <span>Certificado de Autenticidad:</span>
+                                            <span class="font-mono text-vico-text">Incluido</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pt-6 border-t border-vico-border mt-6">
+                                    <p class="text-[11px] text-vico-muted uppercase tracking-widest">Inversión Aproximada</p>
+                                    <div class="flex items-baseline gap-2 mt-1">
+                                        <span id="calculated-price" class="font-serif text-4xl text-vico-gold font-semibold">$980</span>
+                                        <span class="text-xs text-vico-muted">USD</span>
+                                    </div>
+
+                                    <button type="button" onclick="prefillCommissionForm()" class="w-full mt-6 bg-vico-text hover:bg-vico-gold text-white hover:text-vico-text font-medium text-xs uppercase tracking-widest py-4 rounded transition-all duration-300">
+                                        Solicitar este Encargo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Section -->
-    <section id="sobre-mi" class="py-24 relative overflow-hidden absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/85 to-transparent">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="tecnica" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-vico-border/60">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-xs text-vico-gold uppercase tracking-[0.25em] font-medium">Calidad Museológica</span>
+                <h2 class="font-serif text-4xl sm:text-5xl text-vico-text">Proceso Artesanal & Conservación</h2>
+                <p class="text-vico-muted text-sm sm:text-base font-light">
+                    Cada obra está concebida con técnicas y soportes libres de ácido para prevenir el amarilleo, las grietas y el deterioro a lo largo de los siglos.
+                </p>
+            </div>
+
+            <!-- Pestañas Interactivas de Proceso -->
+            <div class="bg-white border border-vico-border rounded-xl p-6 sm:p-10 shadow-sm max-w-5xl mx-auto">
+                <div class="flex border-b border-vico-border mb-8 overflow-x-auto text-xs uppercase tracking-widest">
+                    <button onclick="switchTab('soporte')" id="tab-soporte" class="tab-btn tab-active pb-4 px-6 whitespace-nowrap transition-colors">1. Soporte ACM Inerte</button>
+                    <button onclick="switchTab('pigmentos')" id="tab-pigmentos" class="tab-btn pb-4 px-6 text-vico-muted whitespace-nowrap transition-colors">2. Pigmentos & Veladuras</button>
+                    <button onclick="switchTab('barniz')" id="tab-barniz" class="tab-btn pb-4 px-6 text-vico-muted whitespace-nowrap transition-colors">3. Barniz de Protección UV</button>
+                </div>
+
+                <div id="tab-content-soporte" class="tab-pane space-y-4">
+                    <h3 class="font-serif text-2xl text-vico-text">Paneles Composite de Aluminio (ACM)</h3>
+                    <p class="text-vico-muted text-sm leading-relaxed font-light">
+                        Para la pintura de estudio, Vico utiliza paneles rígidos de aluminio compuesto (ACM) en lugar del lienzo tradicional. Al no verse afectado por los cambios de humedad y temperatura, este soporte elimina las microfisuras en la capa de óleo.
+                    </p>
+                    <ul class="text-xs text-vico-muted space-y-2 pt-2">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-vico-gold"></i> Núcleo imputrescible indeformable</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-vico-gold"></i> Imprimación especial de gesso acrílico de alta adherencia</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-vico-gold"></i> Peso liviano con durabilidad máxima</li>
+                    </ul>
+                </div>
+
+                <div id="tab-content-pigmentos" class="tab-pane space-y-4 hidden">
+                    <h3 class="font-serif text-2xl text-vico-text">Óleos Profesionales & Pigmentos Puros</h3>
+                    <p class="text-vico-muted text-sm leading-relaxed font-light">
+                        Utilización de pigmentos minerales seleccionados por su grado de resistencia a la luz (ASTM I). La técnica por capas y veladuras superpuestas aporta riqueza tonal y profundidad realista.
+                    </p>
+                    <ul class="text-xs text-vico-muted space-y-2 pt-2">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-vico-gold"></i> Concentración de pigmento para matices intensos</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-vico-gold"></i> Transparencias y veladuras continuas</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-vico-gold"></i> Resistencia garantizada a la luz solar</li>
+                    </ul>
+                </div>
+
+                <div id="tab-content-barniz" class="tab-pane space-y-4 hidden">
+                    <h3 class="font-serif text-2xl text-vico-text">Barnizado Final con Gamvar</h3>
+                    <p class="text-vico-muted text-sm leading-relaxed font-light">
+                        Una vez completado el secado, la pintura recibe una capa de barniz sintético transparente Gamvar. Este barniz iguala los brillos, resalta la profundidad de los oscuros y protege la obra frente al polvo y radiación ultravioleta.
+                    </p>
+                    <ul class="text-xs text-vico-muted space-y-2 pt-2">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-vico-gold"></i> Reversible para futuras restauraciones sin dañar la capa pictórica</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-vico-gold"></i> Filtro protector contra radiación UV</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-vico-gold"></i> Acabado satinado o brillante según la preferencia del coleccionista</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="bio" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-vico-border/60">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                
-                <!-- Artist Image Showcase -->
                 <div class="lg:col-span-5 relative">
-                    <div class="relative rounded-2xl overflow-hidden border border-brand-border shadow-2xl">
-                        <img src="img/yopintando.jpg" alt="Vico Rodríguez Trabajando" class="w-full h-[520px] object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent"></div>
-                    </div>
-                    <div class="absolute -bottom-6 -right-6 bg-brand-card border border-brand-border p-6 rounded-2xl hidden sm:block shadow-2xl">
-                        <p class="font-display text-xl font-bold text-brand-accent ">Arte & Gran Formato</p>
-                        <p class="text-xs text-gray-400 mt-1">Para hogares, locales comerciales y mas</p>
+                    <div class="aspect-[4/5] rounded-lg overflow-hidden border border-vico-border shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1000&q=80" alt="Vico Rodríguez Artista Visual" class="w-full h-full object-cover">
                     </div>
                 </div>
 
-                <!-- Artist Bio Content -->
-                <div class="lg:col-span-7">
-                    <span class="text-brand-accent font-semibold text-xs uppercase tracking-widest">Sobre Vico Rodríguez</span>
-                    <h2 class="font-display text-3xl sm:text-5xl font-bold text-black mt-2 leading-tight">
-                        Transformando superficies en expresiones con identidad propia
-                    </h2>
-
-                    <p class="mt-6 text-black-300 text-base sm:text-lg leading-relaxed font-light">
-                        Soy <strong class="text-black font-semibold">Vico Rodríguez</strong> (<a href="https://instagram.com/vicorodriguezgz" target="_blank" class="text-brand-accent hover:underline">@vicorodriguezgz</a>), artista plástica y muralista. Me dedico a intervenir paredes y espacios residenciales o comerciales en obras a gran escala, combinando textura, geometría orgánica y fluidez técnica.
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="text-xs text-vico-gold uppercase tracking-[0.25em] font-medium">Trayectoria Artística</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl text-vico-text">Vico Rodríguez</h2>
+                    <p class="text-vico-muted text-base leading-relaxed font-light">
+                        Vico Rodríguez es una artista visual, muralista y pintora formadora de lenguaje pictórico realista. Su investigación artística explora el punto de contacto entre la botánica, los retratos de fauna nativa y el dinamismo del muralismo urbano.
+                    </p>
+                    <p class="text-vico-muted text-base leading-relaxed font-light">
+                        Desde su taller, desarrolla piezas al óleo caracterizadas por la precisión en el trazo, la búsqueda de la luz natural y el respeto por los ciclos de la naturaleza. Sus intervenciones murales de gran formato dialogan de forma armoniosa con la arquitectura y el espacio público.
                     </p>
 
-                    <p class="mt-4 text-black-400 text-sm sm:text-base leading-relaxed">
-                        Entiendo cada lienzo o muro de mampostería como un elemento vivo capaz de transformar la atmósfera de un ambiente, aportando dinamismo visual y valor estético duradero.
-                    </p>
-
-                    <!-- Features Grid -->
-                    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="p-4 rounded-xl bg-brand-card border border-brand-border">
-                            <div class="w-10 h-10 rounded-lg bg-brand-accent/10 flex items-center justify-center text-brand-accent mb-3">
-                                <i class="fa-solid fa-compass-drafting text-lg"></i>
-                            </div>
-                            <h4 class="font-bold text-black text-sm">Bocetos Exclusivos</h4>
-                            <p class="text-xs text-gray-400 mt-1">Cada proyecto se diseña a medida del espacio y de la luz del ambiente.</p>
+                    <div class="pt-4 grid grid-cols-3 gap-6 border-t border-vico-border">
+                        <div>
+                            <p class="font-serif text-3xl text-vico-text">80+</p>
+                            <p class="text-[10px] text-vico-muted uppercase tracking-wider">Murales Realizados</p>
                         </div>
-
-                        <div class="p-4 rounded-xl bg-brand-card border border-brand-border">
-                            <div class="w-10 h-10 rounded-lg bg-brand-accent/10 flex items-center justify-center text-brand-accent mb-3">
-                                <i class="fa-solid fa-shield-halved text-lg"></i>
-                            </div>
-                            <h4 class="font-bold text-black text-sm">Alta Durabilidad</h4>
-                            <p class="text-xs text-gray-400 mt-1">Materiales de primera calidad resistentes al paso del tiempo e intemperie.</p>
+                        <div>
+                            <p class="font-serif text-3xl text-vico-text">150+</p>
+                            <p class="text-[10px] text-vico-muted uppercase tracking-wider">Obras de Estudio</p>
                         </div>
-                    </div>
-
-                    <!-- Instagram CTA -->
-                    <div class="mt-8 flex items-center gap-4">
-                        <a href="https://instagram.com/vicorodriguezgz" target="_blank" class="inline-flex items-center gap-2 text-sm text-black-200 hover:text-black bg-black/5 hover:bg-black/10 px-6 py-3 rounded-xl border border-black/10 transition-all font-semibold">
-                            <i class="fa-brands fa-instagram text-brand-accent text-lg"></i>
-                            Seguir en Instagram @vicorodriguezgz
-                        </a>
+                        <div>
+                            <p class="font-serif text-3xl text-vico-text">Buenos Aires</p>
+                            <p class="text-[10px] text-vico-muted uppercase tracking-wider">Taller Principal</p>
+                        </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="py-20 bg-brand-dark border-t border-brand-border">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 bg-brand-card p-8 sm:p-10 rounded-2xl border-2 border-white ring-2 ring-white/20 shadow-2xl relative transition-all hover:border-white hover:scale-105">
-            <div class="text-center mb-12">
-                <span class="text-brand-accent font-semibold text-xs uppercase tracking-widest">Preguntas Frecuentes</span>
-                <h2 class="font-display text-3xl sm:text-4xl font-bold text-black mt-2">Dudas habituales</h2>
+        <section id="faq" class="py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-vico-border/60">
+            <div class="text-center mb-16 space-y-3">
+                <span class="text-xs text-vico-gold uppercase tracking-[0.25em] font-medium">Información Útil</span>
+                <h2 class="font-serif text-4xl text-vico-text">Preguntas Frecuentes</h2>
+                <p class="text-vico-muted text-sm font-light">
+                    Respuestas a las consultas más habituales sobre adquisiciones y encargos.
+                </p>
             </div>
 
             <div class="space-y-4">
-                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border">
-                    <h3 class="font-bold text-black text-base flex items-center gap-2">
-                        <i class="fa-solid fa-circle-question text-brand-accent"></i>
-                        ¿Cómo debe estar la pared antes de pintar el mural?
-                    </h3>
-                    <p class="text-xs sm:text-sm text-black-400 mt-2 leading-relaxed pl-6">
-                        La pared debe estar limpia, seca y previamente pintada de un color base (preferentemente blanco o gris claro), libre de humedad o fisuras importantes.
-                    </p>
+                <div class="border border-vico-border rounded-lg bg-white overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full p-5 text-left flex justify-between items-center font-serif text-lg text-vico-text hover:text-vico-gold transition-colors">
+                        <span>¿Cómo es el proceso para solicitar un encargo personalizado?</span>
+                        <i class="fa-solid fa-chevron-down text-xs text-vico-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer hidden p-5 pt-0 text-vico-muted text-sm font-light border-t border-vico-border/40 leading-relaxed">
+                        El proceso comienza con la cotización previa mediante nuestro cotizador online o formulario directo. Acordamos el tema, las dimensiones y el boceto inicial. Una vez aprobado el boceto y recibido el anticipo del 50%, se inicia el trabajo pictórico con actualizaciones semanales.
+                    </div>
                 </div>
 
-                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border">
-                    <h3 class="font-bold text-black text-base flex items-center gap-2">
-                        <i class="fa-solid fa-circle-question text-brand-accent"></i>
-                        ¿Haces envíos de cuadros sobre lienzo a todo el país?
-                    </h3>
-                    <p class="text-xs sm:text-sm text-black-400 mt-2 leading-relaxed pl-6">
-                        ¡Sí! Todas las obras en lienzo se envían cuidadosamente embaladas con protección anti-impacto a cualquier punto del país.
-                    </p>
+                <div class="border border-vico-border rounded-lg bg-white overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full p-5 text-left flex justify-between items-center font-serif text-lg text-vico-text hover:text-vico-gold transition-colors">
+                        <span>¿Realizan envíos internacionales de las obras?</span>
+                        <i class="fa-solid fa-chevron-down text-xs text-vico-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer hidden p-5 pt-0 text-vico-muted text-sm font-light border-t border-vico-border/40 leading-relaxed">
+                        Sí, enviamos a todo el mundo a través de servicios de mensajería especializada (DHL / FedEx Express) con embalaje de madera reforzado y seguro de traslado de obra de arte.
+                    </div>
                 </div>
 
-                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border">
-                    <h3 class="font-bold text-black text-base flex items-center gap-2">
-                        <i class="fa-solid fa-circle-question text-brand-accent"></i>
-                        ¿Cuánto tiempo toma realizar un mural?
-                    </h3>
-                    <p class="text-xs sm:text-sm text-black-400 mt-2 leading-relaxed pl-6">
-                        Depende de la complejidad y de los metros cuadrados. Lo veremos en tu caso particular.
-                    </p>
+                <div class="border border-vico-border rounded-lg bg-white overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full p-5 text-left flex justify-between items-center font-serif text-lg text-vico-text hover:text-vico-gold transition-colors">
+                        <span>¿Las obras incluyen certificado de autenticidad?</span>
+                        <i class="fa-solid fa-chevron-down text-xs text-vico-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer hidden p-5 pt-0 text-vico-muted text-sm font-light border-t border-vico-border/40 leading-relaxed">
+                        Absolutamente. Toda obra original firmada por Vico Rodríguez se entrega acompañada de un Certificado de Autenticidad físico con sello de agua y registro de taller.
+                    </div>
+                </div>
+
+                <div class="border border-vico-border rounded-lg bg-white overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full p-5 text-left flex justify-between items-center font-serif text-lg text-vico-text hover:text-vico-gold transition-colors">
+                        <span>¿Cuál es el tiempo de entrega de una obra al óleo?</span>
+                        <i class="fa-solid fa-chevron-down text-xs text-vico-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer hidden p-5 pt-0 text-vico-muted text-sm font-light border-t border-vico-border/40 leading-relaxed">
+                        Debido a los tiempos técnicos de secado natural del óleo y la aplicación del barniz de conservación, el plazo de entrega habitual varía entre 3 y 6 semanas según el tamaño y la complejidad de la pintura.
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Quote Section / WhatsApp Generator -->
-    <section id="cotizar" class="py-20 bg-brand-card border-t border-brand-border relative">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-10">
-                <span class="text-brand-accent font-semibold text-xs uppercase tracking-widest">Atención Personalizada</span>
-                <h2 class="font-display text-3xl sm:text-5xl font-bold text-black mt-2">Cotizar Proyecto u Obra</h2>
-                <p class="text-black-400 text-sm sm:text-base mt-2">Completa estos breves datos para generar tu mensaje listo para enviar por WhatsApp.</p>
+        <section id="contacto" class="py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 space-y-3">
+                <span class="text-xs text-vico-gold uppercase tracking-[0.25em] font-medium">Contacto Directo</span>
+                <h2 class="font-serif text-4xl text-vico-text">Escribir al Taller</h2>
+                <p class="text-vico-muted text-sm font-light">
+                    Para consultas de adquisición, proyectos murales o propuestas de exhibición.
+                </p>
             </div>
 
-            <!-- Interactive Form Card -->
-            <div class="bg-brand-dark p-6 sm:p-10 rounded-3xl border border-brand-border shadow-2xl">
-                <form id="whatsappForm" onsubmit="sendToWhatsApp(event)" class="space-y-6">
-                    
-                    <!-- Type Selection -->
+            <form id="contact-form" onsubmit="handleContactSubmit(event)" class="bg-white border border-vico-border rounded-xl p-8 space-y-6 shadow-sm">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-black-300 mb-2">¿Qué te gustaría cotizar?</label>
-                        <select id="projectType" class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3.5 text-black focus:outline-none focus:border-brand-accent transition-colors">
-                            <option value="Mural Residencial">Mural Residencial (Casa / Departamento / Terraza)</option>
-                            <option value="Mural Comercial">Mural Comercial (Local / Oficina / Restó)</option>
-                            <option value="Cuadro de Colección">Cuadro Disponible de la Galería</option>
-                            <option value="Encargo Personalizado">Cuadro Personalizado sobre Lienzo</option>
+                        <label class="block text-xs uppercase tracking-widest text-vico-muted mb-2 font-medium">Nombre Completo *</label>
+                        <input type="text" required id="contact-name" placeholder="Ej. Camila Morales" class="w-full bg-vico-bg border border-vico-border rounded p-3 text-sm text-vico-text focus:outline-none focus:border-vico-gold">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-vico-muted mb-2 font-medium">Correo Electrónico *</label>
+                        <input type="email" required id="contact-email" placeholder="Ej. camila@ejemplo.com" class="w-full bg-vico-bg border border-vico-border rounded p-3 text-sm text-vico-text focus:outline-none focus:border-vico-gold">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-vico-muted mb-2 font-medium">Tipo de Consulta</label>
+                        <select id="contact-category" class="w-full bg-vico-bg border border-vico-border rounded p-3 text-sm text-vico-text focus:outline-none focus:border-vico-gold">
+                            <option>Encargo Personalizado (Óleo sobre Panel)</option>
+                            <option>Proyecto Mural Arquitectónico</option>
+                            <option>Adquisición de Obra Disponible</option>
+                            <option>Propuesta de Galería / Exposición</option>
                         </select>
                     </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <!-- Wall/Canvas Size -->
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-black-300 mb-2">Medidas Aproximadas</label>
-                            <input type="text" id="projectSize" placeholder="Ej: 3x2 metros o 120x80 cm" class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3.5 text-black placeholder-black-500 focus:outline-none focus:border-brand-accent transition-colors">
-                        </div>
-
-                        <!-- Location -->
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-black-300 mb-2">Ubicación / Ciudad</label>
-                            <input type="text" id="projectLocation" placeholder="Ej: Buenos Aires, CABA" class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3.5 text-black placeholder-black-500 focus:outline-none focus:border-brand-accent transition-colors">
-                        </div>
-                    </div>
-
-                    <!-- Idea or Details -->
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-black-300 mb-2">Detalles o Idea Visual (Opcional)</label>
-                        <textarea id="projectDetails" rows="3" placeholder="Cuéntame un poco sobre la paleta de colores, concepto o ambiente..." class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3.5 text-black placeholder-black-500 focus:outline-none focus:border-brand-accent transition-colors"></textarea>
+                        <label class="block text-xs uppercase tracking-widest text-vico-muted mb-2 font-medium">Presupuesto / Dimensiones Aproximadas</label>
+                        <input type="text" id="contact-budget" placeholder="Ej. 50x70 cm o $1,000 USD" class="w-full bg-vico-bg border border-vico-border rounded p-3 text-sm text-vico-text focus:outline-none focus:border-vico-gold">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-vico-muted mb-2 font-medium">Detalles del Proyecto o Mensaje *</label>
+                    <textarea id="contact-message" rows="4" required placeholder="Describa su idea, preferencias de fauna o flora, o especificaciones del espacio..." class="w-full bg-vico-bg border border-vico-border rounded p-3 text-sm text-vico-text focus:outline-none focus:border-vico-gold"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-vico-text hover:bg-vico-gold text-white hover:text-vico-text font-medium text-xs uppercase tracking-widest py-4 rounded transition-all duration-300">
+                    Enviar Consulta al Taller
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white hover:text-vico-gold text-2xl z-50 p-2 focus:outline-none" aria-label="Cerrar modal">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 bg-white border border-vico-border rounded-xl p-6 md:p-8 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-center bg-vico-surface rounded-lg overflow-hidden">
+                <img id="modal-img" src="" alt="" class="max-h-[60vh] object-contain rounded">
+            </div>
+            <div class="flex flex-col justify-between space-y-6">
+                <div>
+                    <span id="modal-category" class="text-xs uppercase tracking-widest text-vico-gold font-medium">Categoría</span>
+                    <h3 id="modal-title" class="font-serif text-3xl sm:text-4xl text-vico-text mt-1">Título de la Obra</h3>
+                    <p id="modal-details" class="text-vico-muted text-xs uppercase tracking-widest mt-2 border-b border-vico-border pb-4">Óleo sobre Panel — 50 x 70 cm</p>
+                    <p id="modal-description" class="text-vico-muted text-sm leading-relaxed font-light mt-4">
+                        Descripción conceptual de la obra.
+                    </p>
+                </div>
+
+                <div class="space-y-4 pt-4 border-t border-vico-border">
+                    <div class="flex items-center justify-between">
+                        <span id="modal-status" class="px-3 py-1 text-xs rounded uppercase tracking-wider bg-vico-goldLight text-vico-gold border border-vico-gold/30">Original Disponible</span>
+                        <span id="modal-price" class="font-serif text-2xl text-vico-text font-semibold">$1,200 USD</span>
                     </div>
 
-                    <!-- Submit Button -->
-                    <button type="submit" class="w-full bg-brand-accent hover:bg-brand-accentHover text-white font-bold py-4 rounded-xl transition-all shadow-xl shadow-brand-accent/25 flex items-center justify-center gap-3 text-base">
-                        <i class="fa-brands fa-whatsapp text-2xl"></i>
-                        Enviar Consulta Directa a WhatsApp
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-brand-dark py-12 border-t border-brand-border text-center text-gray-500 text-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="text-left">
-                <span class="font-display font-extrabold text-lg text-black">Arte Plástico & Murales</span>
-                <p class="text-xs text-gray-400 mt-0.5">.Vico art.</p>
-            </div>
-
-            <!-- Social Links -->
-            <div class="flex items-center space-x-6 text-lg">
-                <a href="https://instagram.com/vicorodriguezgz" target="_blank" title="Instagram @vicorodriguezgz" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#cotizar" title="Cotización Directa" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/5491140450691" target="_blank" id="floating-wa" class="fixed bottom-6 right-6 z-40 bg-emerald-500 hover:bg-emerald-600 text-black w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110">
-        <i class="fa-brands fa-whatsapp text-3xl"></i>
-    </a>
-
-    <!-- Lightbox Modal -->
-    <div id="artModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="relative bg-brand-card border border-brand-border rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl">
-            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 text-gray-400 hover:text-black bg-black/50 w-8 h-8 rounded-full flex items-center justify-center">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <img id="modalImg" src="" alt="Detalle Arte" class="w-full h-80 sm:h-96 object-cover">
-            <div class="p-6">
-                <span id="modalCategory" class="text-xs font-bold text-brand-accent uppercase tracking-wider"></span>
-                <h3 id="modalTitle" class="font-display text-2xl font-bold text-black mt-1"></h3>
-                <p id="modalSubtitle" class="text-sm text-gray-300 mt-1"></p>
-                <p id="modalTech" class="text-xs text-brand-ochre mt-3 font-mono"></p>
-
-                <div class="mt-6 flex justify-end">
-                    <button onclick="closeModalAndQuote()" class="bg-brand-accent hover:bg-brand-accentHover text-black text-xs font-bold px-5 py-2.5 rounded-lg transition-all">
-                        Consultar por WhatsApp
+                    <button onclick="inquireModalArtwork()" class="w-full bg-vico-text hover:bg-vico-gold text-white hover:text-vico-text font-medium text-xs uppercase tracking-widest py-3.5 rounded transition-all duration-300">
+                        Consultar Adquisición
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
+    <footer class="bg-white border-t border-vico-border py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-center md:text-left">
+                <p class="font-serif text-xl tracking-widest text-vico-text font-medium">VICO RODRÍGUEZ</p>
+                <p class="text-xs text-vico-muted mt-1 font-light">© 2026 Vico Rodríguez Fine Art. Todos los derechos reservados.</p>
+            </div>
+
+            <div class="flex items-center space-x-6 text-vico-muted text-sm">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="hover:text-vico-gold transition-colors" aria-label="Instagram"><i class="fa-brands fa-instagram text-lg"></i></a>
+                <a href="https://behance.net" target="_blank" rel="noopener noreferrer" class="hover:text-vico-gold transition-colors" aria-label="Behance"><i class="fa-brands fa-behance text-lg"></i></a>
+                <a href="mailto:contacto@vicorodriguez.art" class="hover:text-vico-gold transition-colors" aria-label="Email"><i class="fa-regular fa-envelope text-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // Mobile Menu Toggle
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        // Datos de Obras (Portfolio)
+        const galleryData = [
+            {
+                id: 1,
+                title: "Puma Patagónico & Flora Autóctona",
+                category: "oleos",
+                medium: "Óleo sobre Panel ACM",
+                size: "50 × 70 cm",
+                year: "2025",
+                status: "Disponible",
+                price: "$1,450 USD",
+                img: "https://images.unsplash.com/photo-1561839561-b13bcfe95249?auto=format&fit=crop&w=800&q=80",
+                description: "Estudio figurativo que examina la tensión muscular y la mirada atenta de la fauna andina rodeada de follaje otoñal."
+            },
+            {
+                id: 2,
+                title: "Ritmo Orgánico Mural No. 12",
+                category: "murales",
+                medium: "Acrílico de Exterior & Sellador Mineral",
+                size: "4.5 × 12 metros",
+                year: "2025",
+                status: "Encargo Concluido",
+                price: "Proyecto Privado",
+                img: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80",
+                description: "Integración de arte mural a gran escala comisionada para un complejo residencial sustentable."
+            },
+            {
+                id: 3,
+                title: "Estudio Botánico — Helecho de Solsticio",
+                category: "estudios",
+                medium: "Óleo sobre Papel Preparado",
+                size: "30 × 40 cm",
+                year: "2026",
+                status: "Disponible",
+                price: "$620 USD",
+                img: "https://images.unsplash.com/photo-1578926375605-eaf7559b1458?auto=format&fit=crop&w=800&q=80",
+                description: "Estudio macro delicado que investiga la luz translúcida a través de estructuras foliares."
+            },
+            {
+                id: 4,
+                title: "Vuelo del Cóndor Andino",
+                category: "oleos",
+                medium: "Óleo sobre Panel ACM",
+                size: "60 × 90 cm",
+                year: "2025",
+                status: "Colección Privada",
+                price: "Vendido",
+                img: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80",
+                description: "Composición atmosférica de montaña con iluminación suave y profundidad de campo."
+            },
+            {
+                id: 5,
+                title: "Convergencia de Flora Urbana",
+                category: "murales",
+                medium: "Pintura Mineral de Exterior",
+                size: "3 × 8 metros",
+                year: "2024",
+                status: "Mural Público",
+                price: "Proyecto Público",
+                img: "https://images.unsplash.com/photo-1582561821037-12c823058810?auto=format&fit=crop&w=800&q=80",
+                description: "Mural urbano que explora formas botánicas autóctonas entrelazadas con geometría arquitectónica limpia."
+            },
+            {
+                id: 6,
+                title: "Geometría de Pluma & Corteza",
+                category: "estudios",
+                medium: "Óleo sobre Panel de Lino",
+                size: "25 × 30 cm",
+                year: "2026",
+                status: "Disponible",
+                price: "$510 USD",
+                img: "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=800&q=80",
+                description: "Investigación de contraste de texturas comparando el plumaje de aves con la corteza de árboles del bosque."
+            }
+        ];
 
-        // Portfolio Filter Tabs
-        function filterWorks(category) {
-            const items = document.querySelectorAll('.gallery-item');
-            const buttons = document.querySelectorAll('.filter-btn');
+        let selectedArtwork = null;
 
-            buttons.forEach(btn => {
-                if (btn.getAttribute('data-filter') === category) {
-                    btn.classList.add('bg-brand-accent', 'text-black');
-                    btn.classList.remove('text-gray-400');
-                } else {
-                    btn.classList.remove('bg-brand-accent', 'text-black');
-                    btn.classList.add('text-gray-400');
-                }
-            });
+        // Renderizador de Galería
+        function renderGallery(filter = 'todos') {
+            const grid = document.getElementById('gallery-grid');
+            grid.innerHTML = '';
+
+            const items = filter === 'todos' ? galleryData : galleryData.filter(i => i.category === filter);
 
             items.forEach(item => {
-                if (category === 'all' || item.classList.contains(category)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
+                const card = document.createElement('div');
+                card.className = "bg-white border border-vico-border rounded-lg overflow-hidden group cursor-pointer hover:border-vico-gold transition-all duration-300 shadow-sm fade-in";
+                card.onclick = () => openLightbox(item);
+
+                card.innerHTML = `
+                    <div class="aspect-[4/5] img-hover-zoom relative bg-vico-surface">
+                        <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3">
+                            <span class="text-[10px] uppercase tracking-widest px-2.5 py-1 rounded bg-white/90 backdrop-blur-sm text-vico-text border border-vico-border font-medium">
+                                ${item.status}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <span class="text-[10px] uppercase tracking-widest text-vico-gold font-medium">${item.medium}</span>
+                        <h3 class="font-serif text-xl text-vico-text group-hover:text-vico-gold transition-colors">${item.title}</h3>
+                        <div class="flex justify-between items-center text-xs text-vico-muted pt-2 border-t border-vico-border">
+                            <span>${item.size}</span>
+                            <span class="font-serif text-vico-text text-sm font-semibold">${item.price}</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
             });
         }
 
-        // WhatsApp Direct Link Generator
-        function sendToWhatsApp(e) {
-            e.preventDefault();
-            // REEMPLAZAR ESTE NÚMERO CON EL NÚMERO REAL DE WHATSAPP CON CÓDIGO DE PAÍS
-            const phone = "5491140450691"; 
+        // Manejador de Filtros
+        function filterGallery(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-vico-gold', 'text-white', 'border-vico-gold');
+                btn.classList.add('border-vico-border', 'text-vico-muted', 'bg-white');
+            });
+            event.currentTarget.classList.add('bg-vico-gold', 'text-white', 'border-vico-gold');
+            event.currentTarget.classList.remove('border-vico-border', 'text-vico-muted', 'bg-white');
+            renderGallery(category);
+        }
+
+        // Modal Lightbox
+        function openLightbox(item) {
+            selectedArtwork = item;
+            document.getElementById('modal-img').src = item.img;
+            document.getElementById('modal-title').textContent = item.title;
+            document.getElementById('modal-category').textContent = item.category.toUpperCase();
+            document.getElementById('modal-details').textContent = `${item.medium} — ${item.size} (${item.year})`;
+            document.getElementById('modal-description').textContent = item.description;
+            document.getElementById('modal-price').textContent = item.price;
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        }
+
+        function inquireModalArtwork() {
+            showToast(`Consulta iniciada para "${selectedArtwork.title}".`);
+            closeLightbox();
+            document.getElementById('contact-category').value = "Adquisición de Obra Disponible";
+            document.getElementById('contact-message').value = `Hola Vico, quisiera consultar la disponibilidad de la obra "${selectedArtwork.title}" (${selectedArtwork.price}).`;
+            window.location.href = '#contacto';
+        }
+
+        // Pestañas de Técnica y Conservación
+        function switchTab(tabKey) {
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('tab-active', 'text-vico-text');
+                b.classList.add('text-vico-muted');
+            });
+            document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
+
+            document.getElementById(`tab-${tabKey}`).classList.add('tab-active', 'text-vico-text');
+            document.getElementById(`tab-${tabKey}`).classList.remove('text-vico-muted');
+            document.getElementById(`tab-content-${tabKey}`).classList.remove('hidden');
+        }
+
+        // Lógica del Cotizador de Encargos
+        function calculateEstimate() {
+            const width = parseFloat(document.getElementById('width-cm').value) || 50;
+            const height = parseFloat(document.getElementById('height-cm').value) || 70;
+            const format = document.querySelector('input[name="format"]:checked').value;
+            const complexity = parseFloat(document.getElementById('complexity').value);
+            const addFrame = document.getElementById('addon-frame').checked;
+            const addExpress = document.getElementById('addon-express').checked;
+
+            const areaM2 = (width * height) / 10000;
+            document.getElementById('dimension-text').textContent = `${width} × ${height} cm`;
+            document.getElementById('calc-area').textContent = `${areaM2.toFixed(2)} m²`;
+
+            let baseRate = 2200; // Panel Óleo
+            let estimatedWeeks = "3–4 Semanas";
+
+            if (format === 'mural') {
+                baseRate = 1400;
+                estimatedWeeks = "2–3 Semanas";
+            } else if (format === 'study') {
+                baseRate = 1800;
+                estimatedWeeks = "1–2 Semanas";
+            }
+
+            let price = Math.max(380, areaM2 * baseRate * complexity);
+
+            if (addFrame) price += 220;
+            if (addExpress) price += 300;
+
+            const finalPrice = Math.round(price);
+            document.getElementById('calculated-price').textContent = `$${finalPrice.toLocaleString()}`;
+            document.getElementById('calc-time').textContent = estimatedWeeks;
+        }
+
+        function prefillCommissionForm() {
+            const width = document.getElementById('width-cm').value;
+            const height = document.getElementById('height-cm').value;
+            const price = document.getElementById('calculated-price').textContent;
             
-            const type = document.getElementById('projectType').value;
-            const size = document.getElementById('projectSize').value || 'A definir';
-            const location = document.getElementById('projectLocation').value || 'A definir';
-            const details = document.getElementById('projectDetails').value || 'Sin detalles adicionales';
+            document.getElementById('contact-category').value = "Encargo Personalizado (Óleo sobre Panel)";
+            document.getElementById('contact-budget').value = `${width}x${height} cm (${price} USD)`;
+            document.getElementById('contact-message').value = `Hola Vico, calculé una cotización estimada para una obra personalizada de ${width} x ${height} cm por un valor aproximado de ${price} USD. Me gustaría coordinar los detalles.`;
 
-            const message = `¡Hola Vico! Vi tu sitio web y me interesa cotizar un proyecto:%0A%0A` +
-                            `• *Tipo:* ${encodeURIComponent(type)}%0A` +
-                            `• *Medidas:* ${encodeURIComponent(size)}%0A` +
-                            `• *Ubicación:* ${encodeURIComponent(location)}%0A` +
-                            `• *Detalles:* ${encodeURIComponent(details)}`;
-
-            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+            showToast("¡Datos transferidos al formulario de contacto!");
+            window.location.href = '#contacto';
         }
 
-        // Select work directly from gallery into form
-        function selectWorkForQuote(workName) {
-            document.getElementById('projectDetails').value = `Consulta por: ${workName}`;
+        // Accordion FAQ
+        function toggleFaq(btn) {
+            const answer = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            const isHidden = answer.classList.contains('hidden');
+
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+            document.querySelectorAll('.fa-chevron-down').forEach(i => i.classList.remove('rotate-180'));
+
+            if (isHidden) {
+                answer.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            }
         }
 
-        // Modal Functions
-        let currentModalTitle = '';
-        function openModal(title, subtitle, tech, imgUrl, category) {
-            currentModalTitle = title;
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalSubtitle').innerText = subtitle;
-            document.getElementById('modalTech').innerText = `Técnica: ${tech}`;
-            document.getElementById('modalImg').src = imgUrl;
-            document.getElementById('modalCategory').innerText = category;
-            document.getElementById('artModal').classList.remove('hidden');
+        // Envío de Formulario
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            showToast(`¡Gracias ${name}! Tu consulta ha sido enviada al taller de Vico.`);
+            document.getElementById('contact-form').reset();
         }
 
-        function closeModal() {
-            document.getElementById('artModal').classList.add('hidden');
+        // Menú Móvil
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        function closeModalAndQuote() {
-            closeModal();
-            selectWorkForQuote(currentModalTitle);
-            document.getElementById('cotizar').scrollIntoView({ behavior: 'smooth' });
+        // Notificación Toast
+        function showToast(msg) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "bg-vico-text text-white border border-vico-gold px-4 py-3 rounded-lg shadow-xl text-xs flex items-center gap-3 pointer-events-auto fade-in";
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-vico-gold"></i> <span>${msg}</span>`;
+            
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
         }
+
+        // Inicialización al cargar la ventana
+        window.onload = function() {
+            renderGallery('todos');
+            calculateEstimate();
+        };
     </script>
 </body>
 </html>
