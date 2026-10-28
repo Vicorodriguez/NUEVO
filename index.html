@@ -214,6 +214,7 @@
                     <button onclick="filterGallery('oleos')" class="filter-btn px-4 py-2 rounded border border-vico-border hover:border-vico-gold text-vico-muted hover:text-vico-text bg-white transition-all">Óleos</button>
                     <button onclick="filterGallery('murales')" class="filter-btn px-4 py-2 rounded border border-vico-border hover:border-vico-gold text-vico-muted hover:text-vico-text bg-white transition-all">Murales</button>
                     <button onclick="filterGallery('estudios')" class="filter-btn px-4 py-2 rounded border border-vico-border hover:border-vico-gold text-vico-muted hover:text-vico-text bg-white transition-all">Estudios de Naturaleza</button>
+                    <button onclick="filterGallery('retratos')" class="filter-btn px-4 py-2 rounded border border-vico-border hover:border-vico-gold text-vico-muted hover:text-vico-text bg-white transition-all">Retratos</button>
                 </div>
             </div>
 
@@ -583,7 +584,7 @@
                 <div class="space-y-4 pt-4 border-t border-vico-border">
                     <div class="flex items-center justify-between">
                         <span id="modal-status" class="px-3 py-1 text-xs rounded uppercase tracking-wider bg-vico-goldLight text-vico-gold border border-vico-gold/30">Original Disponible</span>
-                        <span id="modal-price" class="font-serif text-2xl text-vico-text font-semibold">$1,200 USD</span>
+                        <span id="modal-price" class="font-serif text-2xl text-vico-text font-semibold">$</span>
                     </div>
 
                     <button onclick="inquireModalArtwork()" class="w-full bg-vico-text hover:bg-vico-gold text-white hover:text-vico-text font-medium text-xs uppercase tracking-widest py-3.5 rounded transition-all duration-300">
@@ -615,75 +616,108 @@
         const galleryData = [
             {
                 id: 1,
-                title: "Puma Patagónico & Flora Autóctona",
+                title: "La ternura",
                 category: "oleos",
-                medium: "Óleo sobre Panel ACM",
-                size: "50 × 70 cm",
-                year: "2025",
+                medium: "Óleo sobre Lienzo",
+                size: "50 × 100 cm",
+                year: "2026",
                 status: "Disponible",
-                price: "$1,450 USD",
+                price: "$",
                 img: "img/caballoninio.jpg",
-                description: "Estudio figurativo que examina la tensión muscular y la mirada atenta de la fauna andina rodeada de follaje otoñal."
+                description: "Estudio de la ternura de dos almas, humana y animal. Finalmente juntos."
             },
             {
                 id: 2,
-                title: "Ritmo Orgánico Mural No. 12",
+                title: "Pidiendo deseos al viento - Mural Residencial",
                 category: "murales",
-                medium: "Acrílico de Exterior & Sellador Mineral",
-                size: "4.5 × 12 metros",
+                medium: "Acrílicos y pintura exterior sobre pared",
+                size: "60 × 60 cm",
                 year: "2025",
                 status: "Encargo Concluido",
                 price: "Proyecto Privado",
                 img: "img/florpiba.png",
-                description: "Integración de arte mural a gran escala comisionada para un complejo residencial sustentable."
+                description: "Integración de arte mural comisionada para una residencia."
             },
             {
                 id: 3,
-                title: "Estudio Botánico — Helecho de Solsticio",
+                title: "Amanecer en la Playa ",
                 category: "estudios",
-                medium: "Óleo sobre Papel Preparado",
-                size: "30 × 40 cm",
-                year: "2026",
-                status: "Disponible",
-                price: "$620 USD",
-                img: "img/tortugamuralazul.jpg",
-                description: "Estudio macro delicado que investiga la luz translúcida a través de estructuras foliares."
+                medium: "Acrilico sobre Lienzo",
+                size: "40 × 40 cm",
+                year: "2025",
+                status: "Coleccion privada",
+                price: "$",
+                img: "img/amanecerplaya.jpg",
+                description: "Estudio de la luz del amanecer reflejada en la superficie del mar."
             },
             {
                 id: 4,
-                title: "Vuelo del Cóndor Andino",
+                title: "Messi mundial 2026",
                 category: "oleos",
-                medium: "Óleo sobre Panel ACM",
-                size: "60 × 90 cm",
+                medium: "Óleo sobre Papel preparado",
+                size: "20 × 30 cm",
                 year: "2025",
-                status: "Colección Privada",
+                status: "Disponible",
                 price: "Vendido",
                 img: "img/messi2.jpg",
                 description: "Composición atmosférica de montaña con iluminación suave y profundidad de campo."
             },
             {
                 id: 5,
-                title: "Convergencia de Flora Urbana",
+                title: "Acuario Azul — Mural residencial",
                 category: "murales",
-                medium: "Pintura Mineral de Exterior",
-                size: "3 × 8 metros",
+                medium: "Pintura latex de interior y exterior sobre pared",
+                size: "3 × 6 metros",
                 year: "2024",
-                status: "Mural Público",
-                price: "Proyecto Público",
+                status: "Mural Privado",
+                price: "Proyecto Privado",
                 img: "img/tortugamuralazul.jpg",
-                description: "Mural urbano que explora formas botánicas autóctonas entrelazadas con geometría arquitectónica limpia."
+                description: "Mural que explora el fondo marino."
+            }, {
+                id: 6,
+                title: "Retrato de Lola — Mascotas",
+                category: "retratos",
+                medium: "Pintura latex de interior y exterior sobre pared",
+                size: "3 × 6 metros",
+                year: "2024",
+                status: "Mural Privado",
+                price: "Proyecto Privado",
+                img: "img/lola2.jpg",
+                description: "Mural que explora el fondo marino."
+            }, {
+                id: 7,
+                title: "Acuario Azul — Mural residencial",
+                category: "murales",
+                medium: "Pintura latex de interior y exterior sobre pared",
+                size: "3 × 6 metros",
+                year: "2024",
+                status: "Mural Privado",
+                price: "Proyecto Privado",
+                img: "img/bairesdetalle.jpg",
+                description: "Mural que explora el fondo marino."
+            }, {
+                id: 8,
+                title: "Retrato de Dante — Mascotas",
+                category: "retratos",
+                medium: "Pintura latex de interior y exterior sobre pared",
+                size: "3 × 6 metros",
+                year: "2024",
+                status: "Mural Privado",
+                price: "Proyecto Privado",
+                img: "img/danteperro2.jpg",
+                description: "Mural que explora el fondo marino."
             },
             {
-                id: 6,
-                title: "Geometría de Pluma & Corteza",
+                id: 9,
+                title: "Cerro Otto — Vista Panorámica del Bosque",
                 category: "estudios",
-                medium: "Óleo sobre Panel de Lino",
-                size: "25 × 30 cm",
+                medium: "Acrilico sobre tela",
+                size: "30 × 40 cm",
                 year: "2026",
-                status: "Disponible",
-                price: "$510 USD",
+                status: "No disponible",
+                price: "$",
                 img: "img/cerrootto.jpg",
-                description: "Investigación de contraste de texturas comparando el plumaje de aves con la corteza de árboles del bosque."
+                description: "De camino a la cumbre del Cerro Otto, se asoma una hermosa vista panoramica del bosque y del lago Nahuel Huapi."
             }
             
         ];
