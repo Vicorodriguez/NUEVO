@@ -841,9 +841,9 @@
             const height = document.getElementById('height-cm').value;
             const price = document.getElementById('calculated-price').textContent;
             
-            document.getElementById('contact-category').value = "Encargo Personalizado (Óleo sobre Panel)";
-            document.getElementById('contact-budget').value = `${width}x${height} cm (${price} USD)`;
-            document.getElementById('contact-message').value = `Hola Vico, calculé una cotización estimada para una obra personalizada de ${width} x ${height} cm por un valor aproximado de ${price} USD. Me gustaría coordinar los detalles.`;
+            document.getElementById('contact-category').value = "Encargo Personalizado (Óleo sobre Lienzo)";
+            document.getElementById('contact-budget').value = `${width}x${height} cm (${price} pesos)`;
+            document.getElementById('contact-message').value = `Hola Vico, calculé una cotización estimada para una obra personalizada de ${width} x ${height} cm por un valor aproximado de ${price} pesos. Me gustaría coordinar los detalles.`;
 
             showToast("¡Datos transferidos al formulario de contacto!");
             window.location.href = '#contacto';
