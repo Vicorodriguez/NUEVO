@@ -549,7 +549,23 @@
         <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white hover:text-vico-gold text-2xl z-50 p-2 focus:outline-none" aria-label="Cerrar modal">
             <i class="fa-solid fa-xmark"></i>
         </button>
+         <!-- Card de Óleo exclusiva (NO aparece en "Todas") -->
+<div class="card-item" data-category="oleo" data-hide-on-all="true">
+    <div class="space-y-4 pt-4 border-t border-vico-border">
+        <div class="flex items-center justify-between">
+            <span id="modal-status" class="px-3 py-1 text-xs rounded uppercase tracking-wider bg-vico-goldLight text-vico-gold border border-vico-gold/30">
+                Original Disponible
+            </span>
+            <span id="modal-price" class="font-serif text-2xl text-vico-text font-semibold">
+                $1,200 USD
+            </span>
+        </div>
 
+        <button onclick="inquireModalArtwork()" class="w-full bg-vico-text hover:bg-vico-gold text-white hover:text-vico-text font-medium text-xs uppercase tracking-widest py-3.5 rounded transition-all duration-300">
+            Consultar Adquisición
+        </button>
+    </div>
+</div>
         <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 bg-white border border-vico-border rounded-xl p-6 md:p-8 max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-center bg-vico-surface rounded-lg overflow-hidden">
                 <img id="modal-img" src="" alt="" class="max-h-[60vh] object-contain rounded">
@@ -574,6 +590,7 @@
                         Consultar Adquisición
                     </button>
                 </div>
+                  
             </div>
         </div>
     </div>
@@ -617,7 +634,7 @@
                 year: "2025",
                 status: "Encargo Concluido",
                 price: "Proyecto Privado",
-                img: "img/amanecerplaya.jpg",
+                img: "img/florpiba.png",
                 description: "Integración de arte mural a gran escala comisionada para un complejo residencial sustentable."
             },
             {
@@ -641,7 +658,7 @@
                 year: "2025",
                 status: "Colección Privada",
                 price: "Vendido",
-                img: "img/florpiba.png",
+                img: "img/messi2.jpg",
                 description: "Composición atmosférica de montaña con iluminación suave y profundidad de campo."
             },
             {
@@ -653,7 +670,7 @@
                 year: "2024",
                 status: "Mural Público",
                 price: "Proyecto Público",
-                img: "img/cerrootto.jpg",
+                img: "img/tortugamuralazul.jpg",
                 description: "Mural urbano que explora formas botánicas autóctonas entrelazadas con geometría arquitectónica limpia."
             },
             {
@@ -665,9 +682,10 @@
                 year: "2026",
                 status: "Disponible",
                 price: "$510 USD",
-                img: "img/chalten.png",
+                img: "img/cerrootto.jpg",
                 description: "Investigación de contraste de texturas comparando el plumaje de aves con la corteza de árboles del bosque."
             }
+            
         ];
 
         let selectedArtwork = null;
@@ -845,6 +863,30 @@
             renderGallery('todos');
             calculateEstimate();
         };
+        function filterSelection(category) {
+    const cards = document.querySelectorAll('.card-item');
+
+    cards.forEach(card => {
+        const isExcludedFromAll = card.getAttribute('data-hide-on-all') === 'true';
+        const matchesCategory = card.getAttribute('data-category') === category;
+
+        if (category === 'todas') {
+            // Oculta si tiene data-hide-on-all="true", de lo contrario muestra la card
+            if (isExcludedFromAll) {
+                card.style.display = 'none';
+            } else {
+                card.style.display = 'block';
+            }
+        } else {
+            // Muestra solo las cards que coincidan con la categoría seleccionada (ej: 'oleo')
+            if (matchesCategory) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        }
+    });
+}
     </script>
 </body>
 </html>
